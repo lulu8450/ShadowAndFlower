@@ -18,15 +18,14 @@ public class SPlayerMove : MonoBehaviour
     [Header("Sprint Settings")]
     [SerializeField] float sprintMultiplier;
 
-
-    Vector2 moveInput;
-
-    float targetYRotation = 0f;
-    float rotateDuration = 0.2f;
+    [Header("Rotation Sprite Settings")]
+    [SerializeField] float rotateDuration = 0.2f;
     float rotateTimer = 0f;
+    bool rotating = false;
     Quaternion rotateStart;
     Quaternion rotateEnd;
-    bool rotating = false;
+
+    Vector2 moveInput;
 
     private void OnEnable() => inputActions.Enable();
 
