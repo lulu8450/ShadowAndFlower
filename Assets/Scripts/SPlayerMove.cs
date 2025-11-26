@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static UnityEngine.GraphicsBuffer;
@@ -17,10 +18,15 @@ public class SPlayerMove : MonoBehaviour
     [Header("Sprint Settings")]
     [SerializeField] float sprintMultiplier;
 
+
     Vector2 moveInput;
 
-    //float currentRotateSpeed;
-    //float targetRotateSpeed = 1f;
+    float targetYRotation = 0f;
+    float rotateDuration = 0.2f;
+    float rotateTimer = 0f;
+    Quaternion rotateStart;
+    Quaternion rotateEnd;
+    bool rotating = false;
 
     private void OnEnable() => inputActions.Enable();
 
@@ -39,6 +45,23 @@ public class SPlayerMove : MonoBehaviour
         inputActions.Player.Sprint.canceled += OnSprint;
     }
 
+    private void Update()
+    {
+        if (rotating)
+        {
+            rotateTimer += Time.deltaTime;
+            float t = rotateTimer / rotateDuration;
+
+            sprite.rotation = Quaternion.Slerp(rotateStart, rotateEnd, t);
+
+            if (t >= 1f)
+            {
+                rotating = false;
+                sprite.rotation = rotateEnd;
+            }
+        }
+    }
+
     private void FixedUpdate()
     {
         if (ps.canMove)
@@ -51,33 +74,22 @@ public class SPlayerMove : MonoBehaviour
 
             if (direction.magnitude > 0.1f)
             {
-                if (Mathf.Abs(direction.x) > Mathf.Abs(direction.z))
+                if (Mathf.Abs(direction.x) > 0.05f)
                 {
                     if (direction.x > 0) ps.facing = PlayerStates.Facing.Right;
                     else ps.facing = PlayerStates.Facing.Left;
+
+                    RotateSprite(direction);
                 }
-                else
+
+                if (Mathf.Abs(direction.z) > Mathf.Abs(direction.x))
                 {
                     if (direction.z > 0) ps.facing = PlayerStates.Facing.Face;
                     else ps.facing = PlayerStates.Facing.Back;
                 }
             }
 
-            //float targetRotate = 0f;
-            //if (ps.facing == PlayerStates.Facing.Left) targetRotate = 180f;
-
-            //Quaternion targetRotation = Quaternion.Euler(0f, targetRotate, 0f);
-
-            //sprite.rotation = Quaternion.Lerp(
-            //    transform.rotation,
-            //    targetRotation,
-            //    currentRotateSpeed
-            //);
-
         }
-
-
-        //if (currentRotateSpeed <= targetRotateSpeed) currentRotateSpeed += 0.1f;
     }
 
     void OnMove(InputAction.CallbackContext context)
@@ -95,5 +107,15 @@ public class SPlayerMove : MonoBehaviour
             if (context.performed) ps.isSprinting = true;
             else if (context.canceled) ps.isSprinting = false;
         }
+    }
+
+    void RotateSprite(Vector3 direction)
+    {
+        float targetY = direction.x > 0 ? 0f : 180f;
+
+        rotating = true;
+        rotateTimer = 0f;
+        rotateStart = sprite.rotation;
+        rotateEnd = Quaternion.Euler(0f, targetY, 0f);
     }
 }
