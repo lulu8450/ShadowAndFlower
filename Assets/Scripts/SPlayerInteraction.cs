@@ -12,6 +12,8 @@ public class SPlayerInteraction : MonoBehaviour
 
     [SerializeField] Vector3 direction;
 
+    private void OnEnable() => inputActions.Enable();
+
     private void Awake()
     {
         ps = GetComponent<PlayerStates>();
@@ -27,15 +29,14 @@ public class SPlayerInteraction : MonoBehaviour
         {
             if (ps.facing == PlayerStates.Facing.Left) direction = Vector3.left;
             if (ps.facing == PlayerStates.Facing.Right) direction = Vector3.right;
-            if (ps.facing == PlayerStates.Facing.Face) direction = Vector3.back;
-            if (ps.facing == PlayerStates.Facing.Back) direction = Vector3.forward;
+            if (ps.facing == PlayerStates.Facing.Face) direction = Vector3.forward;
+            if (ps.facing == PlayerStates.Facing.Back) direction = Vector3.back;
             
             if (Physics.Raycast(transform.position, direction, out RaycastHit hit, interactionDistance, layerTarget))
             {
                 if (hit.collider != null && hit.collider.TryGetComponent<IInteractable>(out var interactable))
                 {
                     interactable.OnInteractStart(this);
-                    ps.canInteract = false;
                 }
             }
         }

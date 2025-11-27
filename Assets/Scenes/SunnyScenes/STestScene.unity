@@ -133,7 +133,7 @@ GameObject:
   - component: {fileID: 238501397}
   - component: {fileID: 238501396}
   - component: {fileID: 238501401}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Box
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -731,7 +731,7 @@ GameObject:
   - component: {fileID: 1272889986}
   - component: {fileID: 1272889985}
   - component: {fileID: 1272889990}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -801,10 +801,12 @@ MonoBehaviour:
   isJumping: 0
   isSprinting: 0
   isInteracting: 0
+  isActiveCharacter: 0
   canMove: 1
   canSprint: 1
   canJump: 1
   canInteract: 1
+  canCharacterSwitch: 1
   facing: 2
 --- !u!136 &1272889988
 CapsuleCollider:

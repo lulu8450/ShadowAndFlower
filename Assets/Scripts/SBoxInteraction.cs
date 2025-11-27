@@ -1,16 +1,11 @@
 using UnityEngine;
 
-public class SBoxInteraction : MonoBehaviour
+public class SBoxInteraction : MonoBehaviour, IInteractable
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField] PlayerStates ps;
 
-    // Update is called once per frame
-    void Update()
+    public void OnInteractStart(SPlayerInteraction player)
     {
-        
+        Debug.Log("Test 4 -");
     }
 }
