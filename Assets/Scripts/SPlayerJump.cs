@@ -3,8 +3,8 @@ using UnityEngine.InputSystem;
 
 public class SPlayerJump : MonoBehaviour
 {
-    private InputSystemActions inputActions;
-    private Rigidbody rb;
+    InputSystemActions inputActions;
+    Rigidbody rb;
 
     [Header("Jump Settings")]
     [SerializeField] float jumpForce;
