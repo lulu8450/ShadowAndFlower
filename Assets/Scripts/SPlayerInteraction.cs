@@ -7,6 +7,8 @@ public class SPlayerInteraction : MonoBehaviour
 
     InputSystemActions inputActions;
 
+    [SerializeField] SCheckInteractionObject interactionCollider;
+
     [SerializeField] float interactionDistance;
     [SerializeField] LayerMask layerTarget;
 
@@ -35,20 +37,13 @@ public class SPlayerInteraction : MonoBehaviour
     {
         if (ps.canInteract)
         {
-            if (Physics.Raycast(transform.position, direction, out RaycastHit hit, interactionDistance, layerTarget))
+            if (
+                interactionCollider.colliderObject != null
+                && interactionCollider.colliderObject.TryGetComponent<IInteractable>(out var interactable)
+            )
             {
-                if (hit.collider != null && hit.collider.TryGetComponent<IInteractable>(out var interactable))
-                {
-                    interactable.OnInteractStart(this);
-                }
+                interactable.OnInteractStart(this);
             }
         }
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.color = Color.green;
-
-        Gizmos.DrawLine(transform.position, transform.position + (direction * interactionDistance));
     }
 }
