@@ -23,7 +23,7 @@ public class SPlayerInteraction : MonoBehaviour
 
     void OnInteraction(InputAction.CallbackContext context)
     {
-        if (ps.canInteract)
+        if (ps.isActiveCharacter && ps.canInteract)
         {
             if (ps.facing == PlayerStates.Facing.Left) direction = Vector3.left;
             if (ps.facing == PlayerStates.Facing.Right) direction = Vector3.right;

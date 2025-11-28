@@ -22,6 +22,10 @@ public class DialogueManager : MonoBehaviour
     {
         // Initialisation de la conversation
         currentDialogue = startNode;
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.UpdateGameState(GameState.Dialogue);
+        }
         linkManager = LinkManager.Instance;
         DisplayDialogue();
     }
@@ -90,7 +94,10 @@ public class DialogueManager : MonoBehaviour
     private void OnChoiceSelected(Choice selectedChoice)
     {
         // Logique de la Joute : appliquer l'impact sur le lien émotionnel
-        linkManager.UpdateLink(selectedChoice.linkImpact); 
+        if (LinkManager.Instance != null)
+        {
+            LinkManager.Instance.UpdateLink(selectedChoice.linkImpact); 
+        }
 
         // Nettoyer les boutons de choix
         foreach (Transform child in choicesParent)
@@ -103,9 +110,13 @@ public class DialogueManager : MonoBehaviour
         DisplayDialogue();
     }
 
-    private void EndDialogue()
+    private void EndDialogue() // Logique de fin de conversation (cacher l'UI, déclencher un événement de gameplay, etc.)
     {
-        // Logique de fin de conversation (cacher l'UI, déclencher un événement de gameplay, etc.)
+        // Rétablir l'état du jeu à l'exploration
+        if (GameManager.Instance != null)
+        {
+            GameManager.Instance.UpdateGameState(GameState.Exploration);
+        }
         Debug.Log("Fin de la séquence de dialogue.");
     }
 

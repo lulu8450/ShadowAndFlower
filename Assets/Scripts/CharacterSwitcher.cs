@@ -1,15 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System.Linq; // Ajouté pour le TryGetComponent, si besoin.
 public class CharacterSwitcher : MonoBehaviour
 {
     // Singleton pour accès facile
     public static CharacterSwitcher Instance { get; private set; }
 
-    public List<CharacterController> characters; // Référence à Perséphone et Hadès
+    public List<PlayerStates> charactersStates; // Référence à Perséphone et Hadès
     private int currentIndex = 0;
-
-    // Nouveau champ : contrôle si le switch est autorisé
     private bool canCharacterSwitch = true;
 
     private void Awake()
@@ -35,43 +32,48 @@ public class CharacterSwitcher : MonoBehaviour
             GameManager.Instance.OnGameStateChanged.AddListener(OnGameStateChanged);
         }
     }
-    // Fonction appelée par l'événement du GameManager
+    
     private void OnGameStateChanged(GameState newState)
     {
         // Le switch est seulement autorisé en Exploration
         canCharacterSwitch = newState == GameState.Exploration;
         
-        // Optionnel : tu peux utiliser PlayerStates.cs (que tu as uploadé) ici pour plus de détails
-        characters[currentIndex].GetComponent<PlayerStates>().canCharacterSwitch = canCharacterSwitch;
+        // Mettre à jour la permission de switch dans le PlayerStates actif
+        if (charactersStates.Count > currentIndex && charactersStates[currentIndex] != null)
+        {
+             charactersStates[currentIndex].canCharacterSwitch = canCharacterSwitch; 
+        }
     }
+
     public void SwitchCharacter()
     {
-        // CONTRÔLE D'ÉTAT AJOUTÉ : Vérifier si on est en état d'exploration
+        // [CONTRÔLE D'ÉTAT] : Bloquer le switch si l'état est dans un autre mode que "Exploration"
         if (!canCharacterSwitch) 
         {
             Debug.Log($"Switch refusé : Le jeu est en mode {GameManager.Instance.GetCurrentState()}.");
             return;
         }
         // 1. Désactiver le personnage actuel
-        // Utiliser les fonctions Lock/DeLock de PlayerStates.cs pour plus de contrôle
-        characters[currentIndex].GetComponent<PlayerStates>().LockMovement(); // Bloquer l'ancien
-        characters[currentIndex].GetComponent<PlayerStates>().isActiveCharacter = false;
+        PlayerStates oldState = charactersStates[currentIndex];
+        oldState.LockMovement();
+        oldState.isActiveCharacter = false;
 
         // 2. Changer l'index (boucle)
-        currentIndex = (currentIndex + 1) % characters.Count;
+        currentIndex = (currentIndex + 1) % charactersStates.Count;
 
         // 3. Activer le nouveau personnage
         ActivateCharacter(currentIndex);
         
-        // Logique de caméra : le Dév 2 devra déplacer la caméra vers le nouveau personnage.
-        Debug.Log($"Switch vers : {characters[currentIndex].gameObject.name}");
+        // TODO: Logique de camera switch(cinemachine ou autre)
+        Debug.Log($"Switch vers : {charactersStates[currentIndex].gameObject.name}");
     }
     
     private void ActivateCharacter(int index)
     {
-        characters[index].GetComponent<PlayerStates>().isActiveCharacter = true;
-        
-        // (Optionnel) Ici, tu pourrais gérer le visuel : 
-        // Par exemple, l'Artiste 1 pourrait vouloir que le perso inactif devienne transparent.
+        PlayerStates newState = charactersStates[index];
+        newState.isActiveCharacter = true; 
+        newState.DeLockMovement(); 
+        newState.canCharacterSwitch = canCharacterSwitch; // Permettre ou non le switch
     }
+    
 }
