@@ -23,15 +23,18 @@ public class SPlayerInteraction : MonoBehaviour
         inputActions.Player.Interaction.started += OnInteraction;
     }
 
+    private void Update()
+    {
+        if (ps.facing == PlayerStates.Facing.Left) direction = Vector3.left;
+        if (ps.facing == PlayerStates.Facing.Right) direction = Vector3.right;
+        if (ps.facing == PlayerStates.Facing.Face) direction = Vector3.forward;
+        if (ps.facing == PlayerStates.Facing.Back) direction = Vector3.back;
+    }
+
     void OnInteraction(InputAction.CallbackContext context)
     {
         if (ps.canInteract)
         {
-            if (ps.facing == PlayerStates.Facing.Left) direction = Vector3.left;
-            if (ps.facing == PlayerStates.Facing.Right) direction = Vector3.right;
-            if (ps.facing == PlayerStates.Facing.Face) direction = Vector3.forward;
-            if (ps.facing == PlayerStates.Facing.Back) direction = Vector3.back;
-            
             if (Physics.Raycast(transform.position, direction, out RaycastHit hit, interactionDistance, layerTarget))
             {
                 if (hit.collider != null && hit.collider.TryGetComponent<IInteractable>(out var interactable))

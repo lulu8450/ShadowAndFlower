@@ -6,6 +6,6 @@ public class SBoxInteraction : MonoBehaviour, IInteractable
 
     public void OnInteractStart(SPlayerInteraction player)
     {
-        Debug.Log("Test 4 -");
+        Debug.Log("Intéraction avec la box !");
     }
 }
