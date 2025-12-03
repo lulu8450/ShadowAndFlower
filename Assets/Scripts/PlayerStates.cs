@@ -10,11 +10,11 @@ public class PlayerStates : MonoBehaviour
     public bool isActiveCharacter; // Indique si le joueur contrôle ce GameObject
 
     [Header("Permissions du Joueur")]
-    public bool canMove = true; // Indique si le joueur peut se déplacer
-    public bool canSprint = true; // Indique si le joueur peut sprinter
-    public bool canJump = true; // Indique si le joueur peut sauter
-    public bool canInteract = true; // Indique si le joueur peut interagir
-    public bool canCharacterSwitch = true; // Indique si le joueur peut changer de personnage
+    public bool canMove = false; // Indique si le joueur peut se déplacer
+    public bool canSprint = false; // Indique si le joueur peut sprinter
+    public bool canJump = false; // Indique si le joueur peut sauter
+    public bool canInteract = false; // Indique si le joueur peut interagir
+    public bool canCharacterSwitch = false; // Indique si le joueur peut changer de personnage
 
     public enum Facing { Left, Right, Face, Back } // Enum pour les directions
     public Facing facing = Facing.Face; // Direction actuelle du personnage
