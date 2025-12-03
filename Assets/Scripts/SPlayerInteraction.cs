@@ -35,7 +35,7 @@ public class SPlayerInteraction : MonoBehaviour
 
     void OnInteraction(InputAction.CallbackContext context)
     {
-        if (ps.canInteract)
+        if (ps.isActiveCharacter && ps.canInteract)
         {
             if (
                 interactionCollider.colliderObject != null
