@@ -89,6 +89,10 @@ public class SPlayerMove : MonoBehaviour
             }
 
         }
+        else
+        {
+            rb.linearVelocity = new Vector3(0f, rb.linearVelocity.y, 0f);
+        }
     }
 
     void OnMove(InputAction.CallbackContext context)

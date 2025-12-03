@@ -5,6 +5,7 @@ public class SPlayerJump : MonoBehaviour
 {
     InputSystemActions inputActions;
     Rigidbody rb;
+    PlayerStates ps;
 
     [Header("Jump Settings")]
     [SerializeField] float jumpForce;
@@ -15,6 +16,7 @@ public class SPlayerJump : MonoBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        ps = GetComponent<PlayerStates>();
 
         inputActions = new InputSystemActions();
 
@@ -23,9 +25,13 @@ public class SPlayerJump : MonoBehaviour
 
     void OnJump(InputAction.CallbackContext context)
     {
-        if (IsGrounded())
+        if (IsGrounded() && ps.canJump)
         {
             rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        }
+        else
+        {
+            
         }
     }
 
