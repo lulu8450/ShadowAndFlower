@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
+
 public class CharacterSwitcher : MonoBehaviour
 {
     // Singleton pour accès facile
@@ -10,9 +11,7 @@ public class CharacterSwitcher : MonoBehaviour
     public int currentIndex = 0;
     public bool canCharacterSwitch = true;
 
-    // Optional: assign an `InputActionReference` in the inspector (from your Input Actions asset).
-    // If not assigned, the script falls back to checking the keyboard Tab key.
-    public UnityEngine.InputSystem.InputActionReference switchAction;
+    public InputActionReference switchAction;
 
     private void Awake()
     {
