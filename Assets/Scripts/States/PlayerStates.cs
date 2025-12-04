@@ -7,14 +7,16 @@ public class PlayerStates : MonoBehaviour
     public bool isJumping; // Indique si le joueur est en train de sauter
     public bool isSprinting; // Indique si le joueur est en train de sprinter
     public bool isInteracting; // Indique si le joueur intérragit actuellement avec un objet
+    public bool isTriggerInteracting; // Indique si le joueur intérragit actuellement avec un Trigger
     public bool isActiveCharacter; // Indique si le joueur contrôle ce GameObject
 
     [Header("Permissions du Joueur")]
-    public bool canMove = false; // Indique si le joueur peut se déplacer
-    public bool canSprint = false; // Indique si le joueur peut sprinter
-    public bool canJump = false; // Indique si le joueur peut sauter
-    public bool canInteract = false; // Indique si le joueur peut interagir
-    public bool canCharacterSwitch = false; // Indique si le joueur peut changer de personnage
+    public bool canMove; // Indique si le joueur peut se déplacer
+    public bool canSprint; // Indique si le joueur peut sprinter
+    public bool canJump; // Indique si le joueur peut sauter
+    public bool canInteract; // Indique si le joueur peut interagir
+    public bool canTriggerInteract; // Indique si le joueur peut interagir avec un trigger
+    public bool canCharacterSwitch; // Indique si le joueur peut changer de personnage
 
     public enum Facing { Left, Right, Face, Back } // Enum pour les directions
     public Facing facing = Facing.Face; // Direction actuelle du personnage
@@ -43,5 +45,15 @@ public class PlayerStates : MonoBehaviour
     public void DeLockInteraction() // Fonction de déverrouillage de l'interaction
     {
         canInteract = true;
+    }
+
+    public void LockTriggerInteraction() // Fonction de verrouillage de l'interaction
+    {
+        canTriggerInteract = false;
+    }
+
+    public void DeLockTriggerInteraction() // Fonction de déverrouillage de l'interaction
+    {
+        canTriggerInteract = true;
     }
 }
