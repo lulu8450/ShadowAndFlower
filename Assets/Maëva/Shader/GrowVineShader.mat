@@ -87,8 +87,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - EmissiveStrength_: 100
-    - Grow_: 0
+    - EmissiveStrength_: 0
+    - Grow_: 0.19000003
     - _AddPrecomputedVelocity: 0
     - _AlphaClip: 1
     - _AlphaToMask: 0

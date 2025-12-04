@@ -33,7 +33,6 @@ public class GrowVines : MonoBehaviour
                 if (growVinesMeshes[i].materials[j].HasProperty("Grow_"))
                 {
                     growVinesMeshes[i].materials[j].SetFloat("Grow_", minGrow);
-                    growVinesMeshes[i].materials[j].SetFloat("EmissiveStrength_", maxEmissiveStrenght);
                     growVinesMaterials.Add(growVinesMeshes[i].materials[j]);
                 }
             }
@@ -49,7 +48,7 @@ public class GrowVines : MonoBehaviour
             for(int i=0; i<growVinesMaterials.Count; i++)
             {
                 StartCoroutine(GrowVine(growVinesMaterials[i]));
-                //StartCoroutine(EmissiveVine(growVinesMaterials[i]));
+                StartCoroutine(EmissiveVine(growVinesMaterials[i]));
             }
         }
     }
@@ -60,40 +59,27 @@ public class GrowVines : MonoBehaviour
 
         if(!fullyGrown)
         {
-            mat.SetFloat("EmissiveStrength_", maxEmissiveStrenght);
-            emissiveStrenght = maxEmissiveStrenght;
-
-            while (growValue < maxGrow)
+            while(growValue < maxGrow)
             {
                 growValue += 1 /(timeToGrow/refreshRate);
                 mat.SetFloat("Grow_", growValue);
 
-                if(emissiveStrenght > minEmissiveStrenght) emissiveStrenght--;
-                mat.SetFloat("EmissiveStrength_", emissiveStrenght);
+                if(emissiveStrenght > minEmissiveStrenght) emissiveStrenght --;
+                growVinesMeshes[0].material.SetFloat("EmissiveStrength_", emissiveStrenght);
                 yield return new WaitForSeconds(refreshRate);
             }
-
-            emissiveStrenght = minEmissiveStrenght;
-            mat.SetFloat("EmissiveStrength_", minEmissiveStrenght);
-
         }
         else
         {
-            mat.SetFloat("EmissiveStrength_", minEmissiveStrenght);
-            emissiveStrenght = minEmissiveStrenght;
-
             while (growValue > minGrow)
             {
                 growValue -= 1 / (timeToGrow / refreshRate);
                 mat.SetFloat("Grow_", growValue);
 
-                if (emissiveStrenght < maxEmissiveStrenght) emissiveStrenght++;
-                mat.SetFloat("EmissiveStrength_", emissiveStrenght);
+                if (emissiveStrenght < maxEmissiveStrenght) emissiveStrenght ++;
+                growVinesMeshes[0].material.SetFloat("EmissiveStrength_", emissiveStrenght);
                 yield return new WaitForSeconds(refreshRate);
             }
-
-            emissiveStrenght = maxEmissiveStrenght;
-            mat.SetFloat("EmissiveStrength_", maxEmissiveStrenght);
         }
         if (growValue >= maxGrow)
             fullyGrown = true;
@@ -110,7 +96,7 @@ public class GrowVines : MonoBehaviour
             while (growValue < maxGrow)
             {
                 if (emissiveStrenght > minEmissiveStrenght) emissiveStrenght--;
-                mat.SetFloat("EmissiveStrength_", emissiveStrenght);
+                growVinesMeshes[0].material.SetFloat("EmissiveStrength_", emissiveStrenght);
                 yield return new WaitForSeconds(refreshRate);
             }
         }
@@ -119,7 +105,7 @@ public class GrowVines : MonoBehaviour
             while (growValue > minGrow)
             {
                 if (emissiveStrenght < maxEmissiveStrenght) emissiveStrenght++;
-                mat.SetFloat("EmissiveStrength_", emissiveStrenght);
+                growVinesMeshes[0].material.SetFloat("EmissiveStrength_", emissiveStrenght);
                 yield return new WaitForSeconds(refreshRate);
             }
         }
