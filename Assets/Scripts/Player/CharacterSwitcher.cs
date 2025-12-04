@@ -1,8 +1,12 @@
-using UnityEngine;
 using System.Collections.Generic;
+using Unity.VisualScripting;
+using UnityEngine;
 using UnityEngine.InputSystem;
+
 public class CharacterSwitcher : MonoBehaviour
 {
+    InputSystemActions inputActions;
+
     // Singleton pour accès facile
     public static CharacterSwitcher Instance { get; private set; }
 
@@ -10,9 +14,7 @@ public class CharacterSwitcher : MonoBehaviour
     public int currentIndex = 0;
     public bool canCharacterSwitch = true;
 
-    // Optional: assign an `InputActionReference` in the inspector (from your Input Actions asset).
-    // If not assigned, the script falls back to checking the keyboard Tab key.
-    public UnityEngine.InputSystem.InputActionReference switchAction;
+    private void OnEnable() => inputActions.Enable();
 
     private void Awake()
     {
@@ -24,6 +26,10 @@ public class CharacterSwitcher : MonoBehaviour
         {
             Instance = this;
         }
+
+        inputActions = new InputSystemActions();
+
+        inputActions.Player.SwitchCharacter.started += OnSwitchAction;
     }
 
     void Start()
@@ -40,37 +46,8 @@ public class CharacterSwitcher : MonoBehaviour
             GameManager.Instance.OnGameStateChanged.AddListener(OnGameStateChanged);
         }
     }
-    private void OnEnable()
-    {
-        if (switchAction != null && switchAction.action != null)
-        {
-            switchAction.action.performed += OnSwitchAction;
-            switchAction.action.Enable();
-        }
-    }
 
-    private void OnDisable()
-    {
-        if (switchAction != null && switchAction.action != null)
-        {
-            switchAction.action.performed -= OnSwitchAction;
-            switchAction.action.Disable();
-        }
-    }
-
-    void Update()
-    {
-        // If no input action is assigned, fallback to keyboard check (Tab key).
-        if (switchAction == null || switchAction.action == null)
-        {
-            if (Keyboard.current != null && Keyboard.current.tabKey.wasPressedThisFrame)
-            {
-                SwitchCharacter();
-            }
-        }
-    }
-
-    private void OnSwitchAction(UnityEngine.InputSystem.InputAction.CallbackContext ctx)
+    private void OnSwitchAction(InputAction.CallbackContext ctx)
     {
         // Only react on performed phase (already ensured by subscription)
         SwitchCharacter();
@@ -90,6 +67,7 @@ public class CharacterSwitcher : MonoBehaviour
 
     public void SwitchCharacter()
     {
+        Debug.Log("Je marche");
         // [CONTRÔLE D'ÉTAT] : Bloquer le switch si l'état est dans un autre mode que "Exploration"
         if (!canCharacterSwitch) 
         {
@@ -137,11 +115,6 @@ public class CharacterSwitcher : MonoBehaviour
         if (GameManager.Instance != null)
         {
             GameManager.Instance.OnGameStateChanged.RemoveListener(OnGameStateChanged);
-        }
-
-        if (switchAction != null && switchAction.action != null)
-        {
-            switchAction.action.performed -= OnSwitchAction;
         }
     }
 
