@@ -100,34 +100,6 @@ public class GrowVines : MonoBehaviour
         else
             fullyGrown = false;
     }
-
-    IEnumerator EmissiveVine(Material mat)
-    {
-        float growValue = mat.GetFloat("Grow_");
-
-        if (!fullyGrown)
-        {
-            while (growValue < maxGrow)
-            {
-                if (emissiveStrenght > minEmissiveStrenght) emissiveStrenght--;
-                mat.SetFloat("EmissiveStrength_", emissiveStrenght);
-                yield return new WaitForSeconds(refreshRate);
-            }
-        }
-        else
-        {
-            while (growValue > minGrow)
-            {
-                if (emissiveStrenght < maxEmissiveStrenght) emissiveStrenght++;
-                mat.SetFloat("EmissiveStrength_", emissiveStrenght);
-                yield return new WaitForSeconds(refreshRate);
-            }
-        }
-        if (growValue >= maxGrow)
-            fullyGrown = true;
-        else
-            fullyGrown = false;
-    }
 }
 
 
