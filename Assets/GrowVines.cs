@@ -11,7 +11,7 @@ public class GrowVines : MonoBehaviour
     public float timeToGrow = 5f;
     public float refreshRate = 0.05f;
     [Range(0, 1)]
-    public float minGrow = 0.2f;
+    public float minGrow = 0f;
     [Range(0, 1)]
     public float maxGrow = 0.97f;
 
