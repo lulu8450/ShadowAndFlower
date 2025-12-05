@@ -67,7 +67,7 @@ public class CharacterSwitcher : MonoBehaviour
 
     public void SwitchCharacter()
     {
-        Debug.Log("Je marche");
+        //Debug.Log("Je marche");
         // [CONTRÔLE D'ÉTAT] : Bloquer le switch si l'état est dans un autre mode que "Exploration"
         if (!canCharacterSwitch) 
         {
@@ -86,6 +86,7 @@ public class CharacterSwitcher : MonoBehaviour
         {
             oldState.LockMovement();
             oldState.isActiveCharacter = false;
+            oldState.canFollow = !oldState.isActiveCharacter;
         }
 
         // 2. Changer l'index (boucle)
@@ -108,6 +109,7 @@ public class CharacterSwitcher : MonoBehaviour
         newState.isActiveCharacter = true; 
         newState.DeLockMovement(); 
         newState.canCharacterSwitch = canCharacterSwitch; // Permettre ou non le switch
+        newState.canFollow = !newState.isActiveCharacter;
     }
     
     private void OnDestroy()

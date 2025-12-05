@@ -69,22 +69,7 @@ public class SPlayerMove : MonoBehaviour
 
             rb.linearVelocity = new Vector3(velocity.x, rb.linearVelocity.y, velocity.z);
 
-            if (direction.magnitude > 0.1f)
-            {
-                if (Mathf.Abs(direction.x) > 0.05f)
-                {
-                    if (direction.x > 0) ps.facing = PlayerStates.Facing.Right;
-                    else ps.facing = PlayerStates.Facing.Left;
-
-                    RotateSprite(direction);
-                }
-
-                if (Mathf.Abs(direction.z) > Mathf.Abs(direction.x))
-                {
-                    if (direction.z > 0) ps.facing = PlayerStates.Facing.Face;
-                    else ps.facing = PlayerStates.Facing.Back;
-                }
-            }
+            UpdateFacing(direction);
 
         }
         else
@@ -119,4 +104,27 @@ public class SPlayerMove : MonoBehaviour
         rotateStart = sprite.rotation;
         rotateEnd = Quaternion.Euler(0f, targetY, 0f);
     }
+
+    public void UpdateFacing(Vector3 direction)
+    {
+        if (direction.magnitude > 0.1f)
+        {
+            if (Mathf.Abs(direction.x) > 0.05f)
+            {
+                if (direction.x > 0) ps.facing = PlayerStates.Facing.Right;
+                else ps.facing = PlayerStates.Facing.Left;
+
+                RotateSprite(direction);
+            }
+
+            if (Mathf.Abs(direction.z) > Mathf.Abs(direction.x))
+            {
+                if (direction.z > 0) ps.facing = PlayerStates.Facing.Face;
+                else ps.facing = PlayerStates.Facing.Back;
+            }
+        }
+    }
+
+    public float GetSpeed() => speed;
+    public float GetSprintMultiplicator() => sprintMultiplier;
 }
