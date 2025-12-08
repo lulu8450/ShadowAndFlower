@@ -903,14 +903,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shadow
       objectReference: {fileID: 0}
-    - target: {fileID: 7492814828078992290, guid: 8496a2ee1ade10147b24667d4c8bf382, type: 3}
-      propertyPath: machin
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7492814828078992290, guid: 8496a2ee1ade10147b24667d4c8bf382, type: 3}
-      propertyPath: offset
-      value: 1.5
-      objectReference: {fileID: 0}
     - target: {fileID: 9126768028418272668, guid: 8496a2ee1ade10147b24667d4c8bf382, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.99

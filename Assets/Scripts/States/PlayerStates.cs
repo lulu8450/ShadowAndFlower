@@ -26,6 +26,9 @@ public class PlayerStates : MonoBehaviour
     public enum Perso { Persephone, Ades, Shadow } // Enum pour les personnages
     public Perso persoType; // Personnage actuelle
 
+    public enum Following { Follow, Stay } // Enum pour le following des persos
+    public Following following; // Etat du follow actuel
+
     public void LockMovement() // Fonction de verrouillage globale
     {
         canMove = false;

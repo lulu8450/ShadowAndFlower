@@ -2,39 +2,42 @@ using UnityEngine;
 
 public class PuzzleRoom : MonoBehaviour
 {
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.CompareTag("Player"))
-    //    {
-    //        PlayerStates ps = other.gameObject.GetComponent<PlayerStates>();
-
-    //        if (!ps.isActiveCharacter )
-    //        {
-    //            ps.canFollow = false;
-    //        }
-    //    }
-    //}
-
-    private void OnTriggerStay(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
         if (other.CompareTag("Player"))
         {
             PlayerStates ps = other.gameObject.GetComponent<PlayerStates>();
 
-            if (!ps.isActiveCharacter && ps.canFollow) ps.canFollow = false;
+            //if (!ps.isActiveCharacter && ps.persoType != PlayerStates.Perso.Shadow)
+            //{
+            //    ps.canFollow = false;
+            //}
+            
+            //ps.following = PlayerStates.Following.Stay;
+
+            if (ps.persoType != PlayerStates.Perso.Shadow)
+            {
+                ps.following = PlayerStates.Following.Stay;
+                ps.canFollow = false;
+            }
         }
     }
 
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (other.CompareTag("Player"))
-    //    {
-    //        PlayerStates ps = other.gameObject.GetComponent<PlayerStates>();
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            PlayerStates[] allPlayers = FindObjectsByType<PlayerStates>(FindObjectsSortMode.None);
 
-    //        if (!ps.isActiveCharacter)
-    //        {
-    //            ps.canFollow = true;
-    //        }
-    //    }
-    //}
+            foreach (PlayerStates ps in allPlayers)
+            {
+                if (ps.persoType != PlayerStates.Perso.Shadow)
+                {
+                    ps.following = PlayerStates.Following.Follow;
+
+                    if (!ps.isActiveCharacter) ps.canFollow = true;
+                }
+            }
+        }
+    }
 }

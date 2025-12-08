@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Shadow
       objectReference: {fileID: 0}
+    - target: {fileID: 1981633038188058579, guid: 38c754633c6eec4479fd7848e74ee69d, type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3208528042917846736, guid: 38c754633c6eec4479fd7848e74ee69d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.99

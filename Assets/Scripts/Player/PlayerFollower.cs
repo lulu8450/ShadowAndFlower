@@ -32,7 +32,7 @@ public class PlayerFollower : MonoBehaviour
             // Find le Player non actif
             if (playerToFollow == null)
             {
-                playerToFollow = FindActivePlayer();
+                if (ps.persoType != PlayerStates.Perso.Shadow) playerToFollow = FindActivePlayer();
                 if (playerToFollow == null) return;
             }
 
@@ -99,7 +99,7 @@ public class PlayerFollower : MonoBehaviour
             if (playerAdes.facing == PlayerStates.Facing.Face) direction = Vector3.forward;
             if (playerAdes.facing == PlayerStates.Facing.Back) direction = Vector3.back;
 
-            transform.position = playerToFollow.position + (direction * offset);
+            transform.position = playerAdes.transform.position + (direction * offset);
         }
     }
 }

@@ -86,7 +86,9 @@ public class CharacterSwitcher : MonoBehaviour
         {
             oldState.LockMovement();
             oldState.isActiveCharacter = false;
-            oldState.canFollow = !oldState.isActiveCharacter;
+
+            if (oldState.following == PlayerStates.Following.Follow)
+                oldState.canFollow = !oldState.isActiveCharacter;
         }
 
         // 2. Changer l'index (boucle)
