@@ -9,7 +9,7 @@ public class PlayerFollower : MonoBehaviour
 
     [SerializeField] float distanceOffset = 1.5f;
     [SerializeField] float maxDistance = 6f;
-    [SerializeField] float speedMultiplicator = 0.8f;
+    [SerializeField] float speedMultiplicator = 0.9f;
 
     private void Awake()
     {
