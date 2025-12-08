@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8113926879127564865}
   - component: {fileID: 1387532868633544506}
   - component: {fileID: 5080500616875709583}
+  - component: {fileID: 3879256281102530798}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -108,13 +109,16 @@ MonoBehaviour:
   isInteracting: 0
   isTriggerInteracting: 0
   isActiveCharacter: 0
+  isFollowing: 0
   canMove: 0
   canSprint: 0
   canJump: 0
   canInteract: 0
   canTriggerInteract: 0
   canCharacterSwitch: 0
+  canFollow: 1
   facing: 2
+  persoType: 0
 --- !u!114 &8113926879127564865
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -162,6 +166,22 @@ MonoBehaviour:
   layerTarget:
     serializedVersion: 2
     m_Bits: 64
+--- !u!114 &3879256281102530798
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1232968299478998939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5a609c2ce39e07a459c4ec3703b9a556, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerToFollow: {fileID: 0}
+  distanceOffset: 1.5
+  maxDistance: 6
+  speedMultiplicator: 0.9
 --- !u!1 &3014909624441185091
 GameObject:
   m_ObjectHideFlags: 0

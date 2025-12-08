@@ -9,6 +9,7 @@ public class PlayerStates : MonoBehaviour
     public bool isInteracting; // Indique si le joueur intérragit actuellement avec un objet
     public bool isTriggerInteracting; // Indique si le joueur intérragit actuellement avec un Trigger
     public bool isActiveCharacter; // Indique si le joueur contrôle ce GameObject
+    public bool isFollowing; // Indique si le personnage suit le personnage controllé
 
     [Header("Permissions du Joueur")]
     public bool canMove; // Indique si le joueur peut se déplacer
@@ -17,9 +18,13 @@ public class PlayerStates : MonoBehaviour
     public bool canInteract; // Indique si le joueur peut interagir
     public bool canTriggerInteract; // Indique si le joueur peut interagir avec un trigger
     public bool canCharacterSwitch; // Indique si le joueur peut changer de personnage
+    public bool canFollow = true; // Indique si le personnage peut suivre le joueur controllé
 
     public enum Facing { Left, Right, Face, Back } // Enum pour les directions
     public Facing facing = Facing.Face; // Direction actuelle du personnage
+
+    public enum Perso { Persephone, Ades, Shadow } // Enum pour les personnages
+    public Perso persoType; // Personnage actuelle
 
     public void LockMovement() // Fonction de verrouillage globale
     {
@@ -37,23 +42,15 @@ public class PlayerStates : MonoBehaviour
         canInteract = true;
     }
 
-    public void LockInteraction() // Fonction de verrouillage de l'interaction
-    {
-        canInteract = false;
-    }
+    // Fonction de verrouillage de l'interaction
+    public void LockInteraction() { canInteract = false; }
 
-    public void DeLockInteraction() // Fonction de déverrouillage de l'interaction
-    {
-        canInteract = true;
-    }
+    // Fonction de déverrouillage de l'interaction
+    public void DeLockInteraction() { canInteract = true; }
 
-    public void LockTriggerInteraction() // Fonction de verrouillage de l'interaction
-    {
-        canTriggerInteract = false;
-    }
+    // Fonction de verrouillage de l'interaction
+    public void LockTriggerInteraction() { canTriggerInteract = false; }
 
-    public void DeLockTriggerInteraction() // Fonction de déverrouillage de l'interaction
-    {
-        canTriggerInteract = true;
-    }
+    // Fonction de déverrouillage de l'interaction
+    public void DeLockTriggerInteraction() { canTriggerInteract = true; }
 }
