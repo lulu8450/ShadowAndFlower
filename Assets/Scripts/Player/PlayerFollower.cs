@@ -1,5 +1,5 @@
 using UnityEngine;
-using UnityEditor;
+using Sirenix.OdinInspector;
 
 public class PlayerFollower : MonoBehaviour
 {
@@ -12,17 +12,17 @@ public class PlayerFollower : MonoBehaviour
     [SerializeField] float maxDistance = 6f;
     [SerializeField] float speedMultiplicator = 0.9f;
 
-    //Perso machin;
+    bool canShowOffset;
 
-    //[ShowIf(machin == PlayerStates.Perso.Shadow)]
-    [SerializeField] float offset = 0.5f;
+    [ShowIf(nameof(canShowOffset))]
+    [SerializeField] float offset = 1.5f;
 
     private void Awake()
     {
         ps = GetComponent<PlayerStates>();
         pm = GetComponent<SPlayerMove>();
 
-        //machin = ps.persoType;
+        canShowOffset = ps.persoType == PlayerStates.Perso.Shadow;
     }
 
     private void FixedUpdate()
