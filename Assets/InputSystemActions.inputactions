@@ -50,6 +50,15 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Shadow",
+                    "type": "Button",
+                    "id": "be7bb988-611b-4783-84b1-9343da38303c",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -259,6 +268,28 @@
                     "processors": "",
                     "groups": ";Gamepad",
                     "action": "Switch Character",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "17d8b5a2-1329-4b08-8e50-82eb8bbc1fea",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Keyboard&Mouse",
+                    "action": "Shadow",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b7b9b4c0-ab4d-48ee-a163-d13aa92a8620",
+                    "path": "<Gamepad>/rightShoulder",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": ";Gamepad",
+                    "action": "Shadow",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

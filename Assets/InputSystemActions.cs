@@ -136,6 +136,15 @@ public partial class @InputSystemActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Shadow"",
+                    ""type"": ""Button"",
+                    ""id"": ""be7bb988-611b-4783-84b1-9343da38303c"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -345,6 +354,28 @@ public partial class @InputSystemActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": "";Gamepad"",
                     ""action"": ""Switch Character"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""17d8b5a2-1329-4b08-8e50-82eb8bbc1fea"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Keyboard&Mouse"",
+                    ""action"": ""Shadow"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""b7b9b4c0-ab4d-48ee-a163-d13aa92a8620"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": "";Gamepad"",
+                    ""action"": ""Shadow"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -937,6 +968,7 @@ public partial class @InputSystemActions: IInputActionCollection2, IDisposable
         m_Player_Interaction = m_Player.FindAction("Interaction", throwIfNotFound: true);
         m_Player_Jump = m_Player.FindAction("Jump", throwIfNotFound: true);
         m_Player_SwitchCharacter = m_Player.FindAction("Switch Character", throwIfNotFound: true);
+        m_Player_Shadow = m_Player.FindAction("Shadow", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -1035,6 +1067,7 @@ public partial class @InputSystemActions: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Interaction;
     private readonly InputAction m_Player_Jump;
     private readonly InputAction m_Player_SwitchCharacter;
+    private readonly InputAction m_Player_Shadow;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -1066,6 +1099,10 @@ public partial class @InputSystemActions: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/SwitchCharacter".
         /// </summary>
         public InputAction @SwitchCharacter => m_Wrapper.m_Player_SwitchCharacter;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Shadow".
+        /// </summary>
+        public InputAction @Shadow => m_Wrapper.m_Player_Shadow;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -1107,6 +1144,9 @@ public partial class @InputSystemActions: IInputActionCollection2, IDisposable
             @SwitchCharacter.started += instance.OnSwitchCharacter;
             @SwitchCharacter.performed += instance.OnSwitchCharacter;
             @SwitchCharacter.canceled += instance.OnSwitchCharacter;
+            @Shadow.started += instance.OnShadow;
+            @Shadow.performed += instance.OnShadow;
+            @Shadow.canceled += instance.OnShadow;
         }
 
         /// <summary>
@@ -1133,6 +1173,9 @@ public partial class @InputSystemActions: IInputActionCollection2, IDisposable
             @SwitchCharacter.started -= instance.OnSwitchCharacter;
             @SwitchCharacter.performed -= instance.OnSwitchCharacter;
             @SwitchCharacter.canceled -= instance.OnSwitchCharacter;
+            @Shadow.started -= instance.OnShadow;
+            @Shadow.performed -= instance.OnShadow;
+            @Shadow.canceled -= instance.OnShadow;
         }
 
         /// <summary>
@@ -1468,6 +1511,13 @@ public partial class @InputSystemActions: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnSwitchCharacter(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Shadow" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnShadow(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.
