@@ -1,24 +1,26 @@
 using UnityEngine;
 using System.Collections.Generic;
+using System;
+using System.Collections;
 
 [CreateAssetMenu(fileName = "NewDialogue", menuName = "Dialogue/Dialogue Data")]
 public class DialogueData : ScriptableObject
 {
-    // Nom du personnage qui parle (Hadès, Perséphone, Narrateur...)
-    public string speakerName; 
-    
-    // Le texte affiché à l'écran
+    // Le nom du personnage qui parle (Hadès, Perséphone, Narrateur...)
+    public string speakerName;
+
+    // Le texte affiché à l'écran pour cette réplique
     [TextArea(3, 10)]
-    public string sentence; 
+    public string sentence;
 
     // True si ce dialogue ouvre sur un choix (Joute Verbale)
     public bool hasChoices = false;
 
-    // Liste des choix(joutes verbales) possibles si hasChoices est True
+    // Liste des choix (Joutes verbales) possibles si hasChoices est true
     public List<Choice> choices;
 
     // Référence au prochain dialogue à afficher après cette phrase (si pas de choix)
-    public DialogueData nextDialogue; 
+    public DialogueData nextDialogue;
 }
 
 // Structure des choix (Joute Verbale)

@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 29b29b4d8cc913549be77a08a98a27be, type: 3}
-  m_Name: NewDialogue
+  m_Name: Nimph
   m_EditorClassIdentifier: 
   speakerName: 
   sentence: 
