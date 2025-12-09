@@ -7,7 +7,7 @@ public class DialogueData : ScriptableObject
     // Le nom du personnage qui parle (Hadès, Perséphone, Narrateur...)
     public string speakerName;
 
-    // Le texte affiché à l'écran pour cette réplique
+    // Le texte affiché à l'écran pour ce personnage
     [TextArea(3, 10)]
     public List<string> sentences;
 

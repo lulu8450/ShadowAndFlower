@@ -10,6 +10,8 @@ public class PlayerStates : MonoBehaviour
     public bool isTriggerInteracting; // Indique si le joueur intérragit actuellement avec un Trigger
     public bool isActiveCharacter; // Indique si le joueur contrôle ce GameObject
     public bool isFollowing; // Indique si le personnage suit le personnage controllé
+    public bool isCloneCreated; // Indique si le personnage (Hades) a clone actif
+    public bool isDashing; // Indique si le personnage est en train de dasher
 
     [Header("Permissions du Joueur")]
     public bool canMove; // Indique si le joueur peut se déplacer
@@ -19,12 +21,17 @@ public class PlayerStates : MonoBehaviour
     public bool canTriggerInteract; // Indique si le joueur peut interagir avec un trigger
     public bool canCharacterSwitch; // Indique si le joueur peut changer de personnage
     public bool canFollow = true; // Indique si le personnage peut suivre le joueur controllé
+    public bool canMakeClone; // Indique si le personnage (Hades) peut crée un clone
+    public bool canDash; // Indique si le personnage peut dash
 
     public enum Facing { Left, Right, Face, Back } // Enum pour les directions
     public Facing facing = Facing.Face; // Direction actuelle du personnage
 
     public enum Perso { Persephone, Ades, Shadow } // Enum pour les personnages
     public Perso persoType; // Personnage actuelle
+
+    public enum Following { Follow, Stay } // Enum pour le following des persos
+    public Following following; // Etat du follow actuel
 
     public void LockMovement() // Fonction de verrouillage globale
     {
