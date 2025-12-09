@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b29b4d8cc913549be77a08a98a27be, type: 3}
   m_Name: NewDialogue 5
   m_EditorClassIdentifier: 
-  speakerName: 
-  sentences: []
+  speakerName: "D\xE9m\xE9ter"
+  sentences:
+  - "La grenade ?! Jamais tu ne touches \xE0 \xE7a ! Ce fruit n\u2019est pas pour
+    toi ! Tu ne comprends pas le danger, Pers\xE9phone !"
   hasChoices: 0
   choices: []
-  nextDialogue: {fileID: 0}
+  nextDialogue: {fileID: 11400000, guid: 0eabf434e6bc01b4b8c3276105b2c1b4, type: 2}

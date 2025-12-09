@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b29b4d8cc913549be77a08a98a27be, type: 3}
   m_Name: NewDialogue 6
   m_EditorClassIdentifier: 
-  speakerName: 
-  sentences: []
+  speakerName: "Pers\xE9phone"
+  sentences:
+  - "Alors, je comprendrai seule. Je ne peux plus rester enferm\xE9e dans ta lumi\xE8re.
+    Elle m\u2019\xE9touffe."
   hasChoices: 0
   choices: []
-  nextDialogue: {fileID: 0}
+  nextDialogue: {fileID: 11400000, guid: ce1f464f339fceb44967651ab3ec3d6f, type: 2}

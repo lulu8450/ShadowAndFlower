@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b29b4d8cc913549be77a08a98a27be, type: 3}
   m_Name: NewDialogue 1
   m_EditorClassIdentifier: 
-  speakerName: 
-  sentences: []
+  speakerName: "D\xE9m\xE9ter"
+  sentences:
+  - "Pers\xE9phone ! Que fais-tu ici ?!"
   hasChoices: 0
   choices: []
-  nextDialogue: {fileID: 0}
+  nextDialogue: {fileID: 11400000, guid: 8809f6996f8c9174a9c5d3d288f36ecf, type: 2}

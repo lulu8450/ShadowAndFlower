@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b29b4d8cc913549be77a08a98a27be, type: 3}
   m_Name: NewDialogue 8
   m_EditorClassIdentifier: 
-  speakerName: 
-  sentences: []
+  speakerName: "Pers\xE9phone"
+  sentences:
+  - "Ce n\u2019est pas de la d\xE9sob\xE9issance\u2026 je cherche juste des r\xE9ponses.
+    Je dois savoir ce que je suis\u2026 m\xEAme si \xE7a signifie marcher dans l\u2019ombre."
   hasChoices: 0
   choices: []
   nextDialogue: {fileID: 0}

@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b29b4d8cc913549be77a08a98a27be, type: 3}
   m_Name: NewDialogue 7
   m_EditorClassIdentifier: 
-  speakerName: 
-  sentences: []
+  speakerName: "D\xE9m\xE9ter"
+  sentences:
+  - "Ma fille\u2026 tout ce que j\u2019ai fait, c\u2019\xE9tait pour te prot\xE9ger
+    ! Et voil\xE0 comment tu me remercies\u2026 en d\xE9sob\xE9issant ?!"
   hasChoices: 0
   choices: []
-  nextDialogue: {fileID: 0}
+  nextDialogue: {fileID: 11400000, guid: 857f41ce33c4c7444ae24e3c777d3887, type: 2}

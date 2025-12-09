@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b29b4d8cc913549be77a08a98a27be, type: 3}
   m_Name: NewDialogue 4
   m_EditorClassIdentifier: 
-  speakerName: 
-  sentences: []
+  speakerName: "Pers\xE9phone"
+  sentences:
+  - "Je ne joue pas. Je veux la grenade des Enfers. Je veux savoir\u2026"
   hasChoices: 0
   choices: []
-  nextDialogue: {fileID: 0}
+  nextDialogue: {fileID: 11400000, guid: 1e56bb0543b97de48a8e2ade48cee0ca, type: 2}

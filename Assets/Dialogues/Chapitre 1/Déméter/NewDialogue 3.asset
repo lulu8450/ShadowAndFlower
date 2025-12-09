@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b29b4d8cc913549be77a08a98a27be, type: 3}
   m_Name: NewDialogue 3
   m_EditorClassIdentifier: 
-  speakerName: 
-  sentences: []
+  speakerName: "D\xE9m\xE9ter"
+  sentences:
+  - "Comprendre ?! Tu fouilles des temples interdits ! Tu joues avec des forces que
+    tu ne peux m\xEAme pas imaginer !"
   hasChoices: 0
   choices: []
-  nextDialogue: {fileID: 0}
+  nextDialogue: {fileID: 11400000, guid: dd70192ac1c290640b14759e68a70a97, type: 2}
