@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29b29b4d8cc913549be77a08a98a27be, type: 3}
+  m_Name: NewDialogue 15
+  m_EditorClassIdentifier: 
+  speakerName: Nymphe A
+  sentences:
+  - "Pers\xE9phone\u2026 si tu rencontres ce qui vit dans l\u2019ombre\u2026"
+  - Ne parle jamais de ton nom.
+  - "Certains l\u2019attendent depuis longtemps."
+  hasChoices: 0
+  choices: []
+  nextDialogue: {fileID: 11400000, guid: 6e78d682ba0f25646927d5c0cf67d340, type: 2}

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29b29b4d8cc913549be77a08a98a27be, type: 3}
+  m_Name: NewDialogue 7
+  m_EditorClassIdentifier: 
+  speakerName: "Pers\xE9phone"
+  sentences:
+  - "Ma m\xE8re ne peut pas me garder dans sa lumi\xE8re \xE9ternellement."
+  hasChoices: 0
+  choices: []
+  nextDialogue: {fileID: 11400000, guid: bf7e2415a9543b449bc009d613779b44, type: 2}

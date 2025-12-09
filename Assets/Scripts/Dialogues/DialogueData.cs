@@ -1,7 +1,5 @@
 using UnityEngine;
 using System.Collections.Generic;
-using System;
-using System.Collections;
 
 [CreateAssetMenu(fileName = "NewDialogue", menuName = "Dialogue/Dialogue Data")]
 public class DialogueData : ScriptableObject
@@ -11,7 +9,7 @@ public class DialogueData : ScriptableObject
 
     // Le texte affiché à l'écran pour cette réplique
     [TextArea(3, 10)]
-    public string sentence;
+    public List<string> sentences;
 
     // True si ce dialogue ouvre sur un choix (Joute Verbale)
     public bool hasChoices = false;

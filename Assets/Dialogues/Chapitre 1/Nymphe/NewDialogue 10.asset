@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29b29b4d8cc913549be77a08a98a27be, type: 3}
+  m_Name: NewDialogue 10
+  m_EditorClassIdentifier: 
+  speakerName: Nymphe C
+  sentences:
+  - "Oui. L\xE0 o\xF9 les mondes se fr\xF4lent sans se toucher."
+  - "Mais ce passage ne s\u2019ouvre qu\u2019\xE0 celles qui portent une essence\u2026
+    diff\xE9rente."
+  hasChoices: 0
+  choices: []
+  nextDialogue: {fileID: 11400000, guid: bda5c8c451f7d8846a004ac90cd5236b, type: 2}

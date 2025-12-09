@@ -11,7 +11,7 @@ public class DialogueManager : MonoBehaviour
     public TextMeshProUGUI dialogueText; // Le texte de dialogue
     public Transform choicesParent; // Le parent des boutons de choix
     public GameObject choiceButtonPrefab; // La prefab du bouton de choix
-
+    public int currentIndex = 0; // Index pour suivre la phrase actuelle
     [SerializeField] private Coroutine typingCoroutine; // référence à la coroutine de frappe de texte
     [SerializeField] private bool isTyping = false; // Indique si le texte est en train d'être tapé ou non
     [SerializeField] public float typingSpeed = 0.05f; // Délai entre chaque lettre
@@ -48,7 +48,7 @@ public class DialogueManager : MonoBehaviour
             StopCoroutine(typingCoroutine);
         }
         // Lancer la coroutine pour le déroulement du texte
-        typingCoroutine = StartCoroutine(TypeSentence(currentDialogue.sentence));
+        typingCoroutine = StartCoroutine(TypeSentence(currentDialogue));
 
         // 2. Gérer les choix ou la progression automatique
         if (currentDialogue.hasChoices)
@@ -122,16 +122,23 @@ public class DialogueManager : MonoBehaviour
     }
 
     // Nouvelle Coroutine pour le déroulement
-    IEnumerator TypeSentence(string sentence)
+    IEnumerator TypeSentence(DialogueData dialogueData)
     {
         isTyping = true;
         dialogueText.text = ""; // Initialiser le texte à vide
-        
-        foreach (char letter in sentence.ToCharArray())
+        while (currentIndex < dialogueData.sentences.Count)
         {
-            dialogueText.text += letter;
-            yield return new WaitForSeconds(typingSpeed);
-        }
+            string sentence = dialogueData.sentences[currentIndex];
+            dialogueText.text = ""; // Réinitialiser pour chaque phrase
+            foreach (char letter in sentence.ToCharArray())
+            {
+                dialogueText.text += letter;
+                yield return new WaitForSeconds(typingSpeed);
+            }
+            // Attendre une courte pause entre les phrases
+            yield return new WaitForSeconds(0.5f);
+            currentIndex++;
+        }        
         
         isTyping = false;
         
@@ -153,7 +160,7 @@ public class DialogueManager : MonoBehaviour
             if (typingCoroutine != null)
             {
                 StopCoroutine(typingCoroutine);
-                dialogueText.text = currentDialogue.sentence;
+                dialogueText.text = currentDialogue.sentences[currentIndex];
                 isTyping = false;
             }
         }
