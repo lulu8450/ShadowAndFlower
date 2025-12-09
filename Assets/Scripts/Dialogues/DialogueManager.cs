@@ -37,9 +37,10 @@ public class DialogueManager : MonoBehaviour
             EndDialogue();
             return;
         }
-
         // 1. Afficher le nom et la phrase
+        // Use the speakerName field from DialogueData
         nameText.text = currentDialogue.speakerName;
+
         // Démarrer la Coroutine de frappe de texte
         // Si une coroutine est déjà en cours (clic rapide du joueur), on l'arrête
         if (typingCoroutine != null)
