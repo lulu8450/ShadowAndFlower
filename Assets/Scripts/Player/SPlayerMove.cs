@@ -61,6 +61,7 @@ public class SPlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //TODO : Changer le system de mouvement pour la camera
         if (ps.canMove)
         {
             float currentSpeed = ps.isSprinting ? speed * sprintMultiplier : speed;
