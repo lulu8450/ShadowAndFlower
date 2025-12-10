@@ -60,4 +60,16 @@ public class PlayerStates : MonoBehaviour
 
     // Fonction de déverrouillage de l'interaction
     public void DeLockTriggerInteraction() { canTriggerInteract = true; }
+
+    public Vector3 GetFacingToDirection()
+    {
+        Vector3 direction = Vector3.zero;
+
+        if (gameObject.GetComponent<PlayerStates>().facing == Facing.Left) direction = Vector3.left;
+        if (gameObject.GetComponent<PlayerStates>().facing == Facing.Right) direction = Vector3.right;
+        if (gameObject.GetComponent<PlayerStates>().facing == Facing.Face) direction = Vector3.forward;
+        if (gameObject.GetComponent<PlayerStates>().facing == Facing.Back) direction = Vector3.back;
+
+        return direction;
+    }
 }
