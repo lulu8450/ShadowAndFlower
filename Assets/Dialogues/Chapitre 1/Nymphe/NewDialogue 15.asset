@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b29b4d8cc913549be77a08a98a27be, type: 3}
   m_Name: NewDialogue 15
   m_EditorClassIdentifier: 
+  sprite: {fileID: 408213887, guid: d77860538b66f0a47a92c3276dc6f6cd, type: 3}
   speakerName: Nymphe A
   sentences:
   - "Pers\xE9phone\u2026 si tu rencontres ce qui vit dans l\u2019ombre\u2026"

@@ -4,6 +4,8 @@ using System.Collections.Generic;
 [CreateAssetMenu(fileName = "NewDialogue", menuName = "Dialogue/Dialogue Data")]
 public class DialogueData : ScriptableObject
 {
+    // Image associée au dialogue (personnage qui parle)
+    public Sprite sprite;
     // Le nom du personnage qui parle (Hadès, Perséphone, Narrateur...)
     public string speakerName;
 

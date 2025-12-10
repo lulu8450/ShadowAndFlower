@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b29b4d8cc913549be77a08a98a27be, type: 3}
   m_Name: NewDialogue 3
   m_EditorClassIdentifier: 
+  sprite: {fileID: 805920027, guid: d77860538b66f0a47a92c3276dc6f6cd, type: 3}
   speakerName: Nymphe B
   sentences:
   - "Il y a des choses que D\xE9m\xE9ter ne te dira jamais. Des choses plus anciennes

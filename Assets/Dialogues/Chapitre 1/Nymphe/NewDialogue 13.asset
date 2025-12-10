@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b29b4d8cc913549be77a08a98a27be, type: 3}
   m_Name: NewDialogue 13
   m_EditorClassIdentifier: 
+  sprite: {fileID: 1741686655, guid: 6d9a3193992b928448a944a7dd80a369, type: 3}
   speakerName: Nymphe C
   sentences:
   - "Mais ce chemin ne peut pas \xEAtre referm\xE9."

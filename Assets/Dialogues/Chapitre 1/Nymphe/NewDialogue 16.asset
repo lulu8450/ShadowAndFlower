@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 29b29b4d8cc913549be77a08a98a27be, type: 3}
   m_Name: NewDialogue 16
   m_EditorClassIdentifier: 
+  sprite: {fileID: 1442418669, guid: 13cdb7f6162161f47a6c1e9d03d8199f, type: 3}
   speakerName: "Pers\xE9phone"
   sentences:
   - Pourquoi ?

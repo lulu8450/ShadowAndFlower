@@ -2,11 +2,16 @@ using UnityEngine;
 using TMPro;
 using System.Collections;
 using UnityEngine.UI;
+using UnityEngine.InputSystem;
 
 public class DialogueManager : MonoBehaviour
 {
     // Référence aux éléments UI (à assigner dans l'Inspector)
     [Header("UI References")]
+    public Canvas dialogueCanvas; // Le canvas de dialogue
+    public GameObject dialoguePanel; // Le panneau de dialogue
+    public Image imageSpeaker; // Image du personnage qui parle
+    public TextMeshProUGUI canPassText; // Texte indiquant que le joueur peut passer
     public TextMeshProUGUI nameText; // Le nom du personnage qui parle
     public TextMeshProUGUI dialogueText; // Le texte de dialogue
     public Transform choicesParent; // Le parent des boutons de choix
@@ -17,17 +22,52 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] public float typingSpeed = 0.05f; // Délai entre chaque lettre
     [SerializeField] private DialogueData currentDialogue; // Le noeud de dialogue actuel
     [SerializeField] private LinkManager linkManager; // Référence au système de lien émotionnel (à implémenter)
+    [SerializeField] private PlayerStates playerStates;
+    [SerializeField] private bool next = false;
+    [SerializeField] private InputActionReference interactAction; 
 
     public void StartDialogue(DialogueData startNode)
     {
+        if (playerStates != null) playerStates.LockMovement();
+        if (choicesParent != null) choicesParent.gameObject.SetActive(false);
+        if (dialoguePanel != null) dialoguePanel.SetActive(true);
+        if (dialogueCanvas != null) dialogueCanvas.gameObject.SetActive(true);
+
         // Initialisation de la conversation
         currentDialogue = startNode;
+        currentIndex = 0;
         if (GameManager.Instance != null)
         {
             GameManager.Instance.UpdateGameState(GameState.Dialogue);
         }
         linkManager = LinkManager.Instance;
         DisplayDialogue();
+    }
+    private void OnEnable()
+    {
+        if (interactAction != null && interactAction.action != null)
+        {
+            interactAction.action.performed += OnInteractPerformed;
+            interactAction.action.Enable();
+        }
+    }
+
+    private void OnDisable()
+    {
+        if (interactAction != null && interactAction.action != null)
+        {
+            interactAction.action.performed -= OnInteractPerformed;
+            interactAction.action.Disable();
+        }
+    }
+
+    private void OnInteractPerformed(InputAction.CallbackContext ctx)
+    {
+        // Only set next if player is allowed to interact
+        if (playerStates == null || playerStates.canInteract)
+        {
+            next = true;
+        }
     }
 
     private void DisplayDialogue()
@@ -39,7 +79,9 @@ public class DialogueManager : MonoBehaviour
         }
         // 1. Afficher le nom et la phrase
         // Use the speakerName field from DialogueData
-        nameText.text = currentDialogue.speakerName;
+        if (nameText != null) nameText.text = currentDialogue.speakerName;
+        // Mettre à jour l'image du personnage qui parle
+        if (imageSpeaker != null) imageSpeaker.sprite = currentDialogue.sprite;
 
         // Démarrer la Coroutine de frappe de texte
         // Si une coroutine est déjà en cours (clic rapide du joueur), on l'arrête
@@ -47,8 +89,8 @@ public class DialogueManager : MonoBehaviour
         {
             StopCoroutine(typingCoroutine);
         }
-        // Lancer la coroutine pour le déroulement du texte
-        typingCoroutine = StartCoroutine(TypeSentence(currentDialogue));
+        // Lancer la coroutine pour le déroulement du texte (une phrase à la fois)
+        typingCoroutine = StartCoroutine(TypeSentence());
 
         // 2. Gérer les choix ou la progression automatique
         if (currentDialogue.hasChoices)
@@ -59,20 +101,66 @@ public class DialogueManager : MonoBehaviour
         else
         {
             // TODO : Logique d'attente/input pour passer au dialogue suivant
+            // StartCoroutine(WaitForPlayerInteraction());
         }
     }
 
     public void ProgressDialogue()
     {
-        // Fonction appelée par un clic du joueur si pas de choix
-        if (!currentDialogue.hasChoices)
+        if (currentDialogue == null) return;
+
+        // If text is typing, finish current sentence
+        if (isTyping)
         {
-            currentDialogue = currentDialogue.nextDialogue;
+            CompleteCurrentSentence();
+            return;
+        }
+
+        // If there are more sentences in this node, advance to next
+        currentIndex++;
+        if (currentDialogue.sentences != null && currentIndex < currentDialogue.sentences.Count)
+        {
+            if (typingCoroutine != null) StopCoroutine(typingCoroutine);
+            typingCoroutine = StartCoroutine(TypeSentence());
+            return;
+        }
+
+        // No more sentences in current node
+        if (currentDialogue.hasChoices)
+        {
+            DisplayChoices(currentDialogue);
+            return;
+        }
+
+        // Move to next dialogue node
+        currentDialogue = currentDialogue.nextDialogue;
+        currentIndex = 0;
+        if (currentDialogue != null)
+        {
             DisplayDialogue();
         }
-        // Si c'est un choix, on ne progresse que via le bouton de choix
+        else
+        {
+            EndDialogue();
+        }
     }
 
+    private void CompleteCurrentSentence()
+    {
+        if (typingCoroutine != null)
+        {
+            StopCoroutine(typingCoroutine);
+            typingCoroutine = null;
+        }
+
+        if (dialogueText != null && currentDialogue != null && currentDialogue.sentences != null &&
+            currentIndex >= 0 && currentIndex < currentDialogue.sentences.Count)
+        {
+            dialogueText.text = currentDialogue.sentences[currentIndex];
+        }
+
+        isTyping = false;
+    }
     private void DisplayChoices(DialogueData nodeWithChoices)
     {
         // Nettoyer les anciens choix
@@ -80,7 +168,7 @@ public class DialogueManager : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-
+        choicesParent.gameObject.SetActive(true);
         // Créer les boutons de choix (Telle une Joute Verbale)
         foreach (var choice in nodeWithChoices.choices)
         {
@@ -118,34 +206,60 @@ public class DialogueManager : MonoBehaviour
         {
             GameManager.Instance.UpdateGameState(GameState.Exploration);
         }
+        dialogueCanvas.gameObject.SetActive(false);
+        playerStates.DeLockMovement();
         Debug.Log("Fin de la séquence de dialogue.");
     }
 
     // Nouvelle Coroutine pour le déroulement
-    IEnumerator TypeSentence(DialogueData dialogueData)
+    IEnumerator TypeSentence()
     {
+        if (currentDialogue == null || currentDialogue.sentences == null || currentIndex >= currentDialogue.sentences.Count)
+        {
+            yield break;
+        }
+
         isTyping = true;
-        dialogueText.text = ""; // Initialiser le texte à vide
-        while (currentIndex < dialogueData.sentences.Count)
+        string sentence = currentDialogue.sentences[currentIndex];
+        if (dialogueText != null) dialogueText.text = ""; // Initialiser le texte à vide
+
+        foreach (char letter in sentence.ToCharArray())
         {
-            string sentence = dialogueData.sentences[currentIndex];
-            dialogueText.text = ""; // Réinitialiser pour chaque phrase
-            foreach (char letter in sentence.ToCharArray())
-            {
-                dialogueText.text += letter;
-                yield return new WaitForSeconds(typingSpeed);
-            }
-            // Attendre une courte pause entre les phrases
-            yield return new WaitForSeconds(0.5f);
-            currentIndex++;
-        }        
-        
+            if (dialogueText != null) dialogueText.text += letter;
+            yield return new WaitForSeconds(typingSpeed);
+        }
+
+        // Finished typing one sentence
         isTyping = false;
-        
-        // Si ce n'est pas un choix, le joueur peut maintenant cliquer pour progresser.
-        if (!currentDialogue.hasChoices)
+
+        // If current node has choices, show them immediately
+        if (currentDialogue.hasChoices)
         {
-            // Indicateur visuel (flèche clignotante, par exemple) pour avancer.
+            DisplayChoices(currentDialogue);
+            yield break;
+        }
+
+        // Otherwise wait for player interaction before proceeding
+        yield return StartCoroutine(WaitForPlayerInteraction());
+
+        // Advance to next sentence or node
+        currentIndex++;
+        if (currentDialogue != null && currentDialogue.sentences != null && currentIndex < currentDialogue.sentences.Count)
+        {
+            typingCoroutine = StartCoroutine(TypeSentence());
+            yield break;
+        }
+
+        // No more sentences in this node
+        if (currentDialogue != null && currentDialogue.nextDialogue != null)
+        {
+            currentDialogue = currentDialogue.nextDialogue;
+            currentIndex = 0;
+            DisplayDialogue();
+        }
+        else
+        {
+            EndDialogue();
         }
     }
 
@@ -156,19 +270,36 @@ public class DialogueManager : MonoBehaviour
 
         if (isTyping)
         {
-            // Si le joueur clique pendant le déroulement : on affiche le texte complet immédiatement
+            // Finish typing immediately
             if (typingCoroutine != null)
             {
                 StopCoroutine(typingCoroutine);
-                dialogueText.text = currentDialogue.sentences[currentIndex];
+                if (dialogueText != null && currentDialogue.sentences != null && currentIndex < currentDialogue.sentences.Count)
+                    dialogueText.text = currentDialogue.sentences[currentIndex];
                 isTyping = false;
             }
         }
-        else if (!currentDialogue.hasChoices)
+        else
         {
-            // Si le texte est fini et pas de choix : on passe à la phrase suivante
-            ProgressDialogue();
+            // Trigger the same flag as input action
+            next = true;
         }
-        // Si hasChoices est True, le clic ne fait rien (il faut sélectionner un bouton)
+        // If hasChoices is True, the click does nothing other than allowing selection
+    }
+
+    private IEnumerator WaitForPlayerInteraction()
+    {
+        // Small initial delay to avoid instant skipping
+        yield return new WaitForSeconds(0.2f);
+
+        if (canPassText != null) canPassText.text = "Press E to pass";
+        if (playerStates != null) playerStates.canInteract = true;
+
+        // Wait until the interact action sets next to true
+        yield return new WaitUntil(() => next == true);
+
+        if (canPassText != null) canPassText.text = "";
+        next = false;
+        if (playerStates != null) playerStates.canInteract = false;
     }
 }
