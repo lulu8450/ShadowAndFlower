@@ -8,11 +8,12 @@ public class BrigdeTriggerInteraction : MonoBehaviour, ITriggerInteractable
     public void OnInteractStart(SPlayerInteraction player)
     {
         // A changer
-        bridge.position = new Vector3(bridge.position.x, 0, bridge.position.z);
+        Debug.Log("Trigger Interaction in interactable");
         // ------------------------
 
         bridgeColliderCenter.SetActive(false);
 
+        player.GetComponent<PlayerStates>().LockTriggerInteraction();
         gameObject.SetActive(false);
     }
 
@@ -20,6 +21,7 @@ public class BrigdeTriggerInteraction : MonoBehaviour, ITriggerInteractable
     {
         if (collision.CompareTag("Player"))
         {
+            // Debug.Log("Trigger Interaction in trigger");
             collision.GetComponent<PlayerStates>().DeLockTriggerInteraction();
         }
     }
