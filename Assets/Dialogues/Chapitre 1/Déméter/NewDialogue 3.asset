@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29b29b4d8cc913549be77a08a98a27be, type: 3}
+  m_Name: NewDialogue 3
+  m_EditorClassIdentifier: 
+  speakerName: "D\xE9m\xE9ter"
+  sentences:
+  - "Comprendre ?! Tu fouilles des temples interdits ! Tu joues avec des forces que
+    tu ne peux m\xEAme pas imaginer !"
+  hasChoices: 0
+  choices: []
+  nextDialogue: {fileID: 11400000, guid: dd70192ac1c290640b14759e68a70a97, type: 2}

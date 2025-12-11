@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29b29b4d8cc913549be77a08a98a27be, type: 3}
+  m_Name: NewDialogue 1
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 408213887, guid: d77860538b66f0a47a92c3276dc6f6cd, type: 3}
+  speakerName: Nymphe A
+  sentences:
+  - "Pers\xE9phone\u2026 tu tournes en rond depuis l\u2019aube. Ta lumi\xE8re tremble.
+    Il se passe quelque chose, n\u2019est-ce pas ?"
+  hasChoices: 0
+  choices: []
+  nextDialogue: {fileID: 11400000, guid: 0ebddb7343cd03645a303bef9193685e, type: 2}
