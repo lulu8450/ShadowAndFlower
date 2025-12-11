@@ -9,9 +9,8 @@ Material:
   m_PrefabAsset: {fileID: 0}
   m_Name: M_FireFX_1
   m_Shader: {fileID: 4800000, guid: 707d42827b5c79e4fb8aa317dffe2924, type: 3}
-  m_Parent: {fileID: 0}
-  m_ModifiedSerializedProperties: 0
-  m_ValidKeywords: []
+  m_ValidKeywords:
+  - _USECOLOR_ON
   m_InvalidKeywords:
   - _USEOWNCOLOR_ON
   m_LightmapFlags: 4
@@ -20,7 +19,6 @@ Material:
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
-  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -29,7 +27,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DissolveTex:
-        m_Texture: {fileID: 2800000, guid: 31955999d2298af42b5ec8847d4a9df1, type: 3}
+        m_Texture: {fileID: 2800000, guid: a4537dbd3f5a95b419c5d16b1fcaaf60, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DistTex:
@@ -70,7 +68,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _ColorIntensity: 5
+    - _ColorIntensity: 1
     - _DepthFade_Distance: 1
     - _DissTex_UV_invert: 0
     - _Distort_intensity: 0
@@ -82,7 +80,7 @@ Material:
     - _MaskTex_UV_invert: 0
     - _SubDissolveTex_add: 0
     - _SubDissolveTex_multi: 1
-    - _UseColor: 0
+    - _UseColor: 1
     - _UseDepthFade: 0
     - _UseDissolveColor: 0
     - _UseFresnel: 0
@@ -102,11 +100,10 @@ Material:
     - _MainTex_uv: {r: 0, g: 0, b: 1, a: 1}
     - _Mask_udrl: {r: 0, g: 0, b: 0, a: 0}
     - _RendererColor: {r: 1, g: 1, b: 1, a: 1}
-    - _Smoothstep: {r: 0, g: 0, b: 0, a: 0}
-    - _TintColor: {r: 0.5396226, g: 0, b: 0.05301144, a: 1}
+    - _Smoothstep: {r: 0, g: 0.12, b: 0, a: 0}
+    - _TintColor: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
     - _VOTex_speed: {r: 0, g: 0, b: 0, a: 0}
     - _VOTex_uv: {r: 0, g: 0, b: 1, a: 1}
-    - _color1: {r: 0.3509434, g: 0.013791604, b: 0, a: 1}
-    - _color2: {r: 0.3660378, g: 0, b: 0, a: 1}
+    - _color1: {r: 1, g: 1, b: 1, a: 1}
+    - _color2: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
-  m_AllowLocking: 1
