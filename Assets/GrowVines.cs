@@ -195,7 +195,7 @@ public class GrowVines : MonoBehaviour
 
     // État interne
     private bool isGrowingOrRetracting = false;
-    private bool isFullyGrown = false;
+    [SerializeField] private bool isFullyGrown = false;
     private float currentGrowValue;
 
     void Start()
