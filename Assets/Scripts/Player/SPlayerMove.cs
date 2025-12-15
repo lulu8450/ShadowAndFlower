@@ -61,11 +61,21 @@ public class SPlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //TODO : Changer le system de mouvement pour la camera
+        //TODO : mettre des triggers
         if (ps.canMove)
         {
+            Camera camera = Camera.main;
+            var forward = camera.transform.forward;
+            var right = camera.transform.right;
+
+            forward.y = 0f;
+            right.y = 0f;
+
+            forward.Normalize();
+            right.Normalize();
+
             float currentSpeed = ps.isSprinting ? speed * sprintMultiplier : speed;
-            Vector3 direction = new Vector3(moveInput.x, 0f, moveInput.y).normalized;
+            Vector3 direction = new Vector3((forward * moveInput.x).x, 0f, -moveInput.y).normalized;
             Vector3 velocity = direction * currentSpeed;
 
             rb.linearVelocity = new Vector3(velocity.x, rb.linearVelocity.y, velocity.z);
