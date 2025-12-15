@@ -273,6 +273,7 @@ public class GrowVines : MonoBehaviour
     // Fonction unique pour mettre à jour les propriétés sur l'instance de Material unique
     private void UpdateMaterials(float growVal, float emissiveVal)
     {
+        var mesh = growVinesMeshes[0];
         // *******************************************************************
         // ATTENTION : Les noms des propriétés doivent correspondre EXACTEMENT 
         // au "Reference Name" de ton Shader Graph. (Ex: "Grow" ou "_Grow")
@@ -282,16 +283,23 @@ public class GrowVines : MonoBehaviour
 
         // Modification de la valeur Grow
         // J'utilise "Grow" car c'est le label principal, si ça ne marche pas, essaie "_Grow"
+        if (gameObjectMaterial.HasProperty("Grow_"))
+        {
+            Debug.Log("j'ai la propriété grow_");
+            gameObjectMaterial.SetFloat("Grow_", growVal);
+        }
         if (gameObjectMaterial.HasProperty("Grow"))
         {
+            Debug.Log("j'ai la propriété grow");
             gameObjectMaterial.SetFloat("Grow", growVal);
         }
 
         // Modification de la force émissive
         // J'utilise "EmissiveStrength" comme dans ton image
-        if (gameObjectMaterial.HasProperty("EmissiveStrength"))
+        if (gameObjectMaterial.HasProperty("EmissiveStrength_"))
         {
-            gameObjectMaterial.SetFloat("EmissiveStrength", emissiveVal);
+            Debug.Log("j'ai la propriété EmissiveStrength_");
+            gameObjectMaterial.SetFloat("EmissiveStrength_", emissiveVal);
         }
 
         // C'est tout. Le Material est modifié, et Unity met à jour le MeshRenderer qui l'utilise.
@@ -301,6 +309,7 @@ public class GrowVines : MonoBehaviour
     {
         float targetGrow = growing ? maxGrow : minGrow;
         int targetEmissive = growing ? minEmissiveStrenght : maxEmissiveStrenght;
+        Debug.Log($"growing is {growing}");
 
         // Démarrage VFX
         if (growing && vinesVFX != null) vinesVFX.Play();
