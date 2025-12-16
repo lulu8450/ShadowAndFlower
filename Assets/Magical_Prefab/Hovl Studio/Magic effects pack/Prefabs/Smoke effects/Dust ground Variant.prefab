@@ -10,15 +10,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 104750483815739857, guid: 41494896fc96c9748b81d3356632794e, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: 1.8070602
       objectReference: {fileID: 0}
     - target: {fileID: 104750483815739857, guid: 41494896fc96c9748b81d3356632794e, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 19.489538
       objectReference: {fileID: 0}
     - target: {fileID: 104750483815739857, guid: 41494896fc96c9748b81d3356632794e, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: -132.0399
       objectReference: {fileID: 0}
     - target: {fileID: 104750483815739857, guid: 41494896fc96c9748b81d3356632794e, type: 3}
       propertyPath: m_LocalRotation.w
@@ -26,15 +26,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 104750483815739857, guid: 41494896fc96c9748b81d3356632794e, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 104750483815739857, guid: 41494896fc96c9748b81d3356632794e, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 104750483815739857, guid: 41494896fc96c9748b81d3356632794e, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 104750483815739857, guid: 41494896fc96c9748b81d3356632794e, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -48,9 +48,33 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6115539449509838113, guid: 41494896fc96c9748b81d3356632794e, type: 3}
+      propertyPath: prewarm
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6115539449509838113, guid: 41494896fc96c9748b81d3356632794e, type: 3}
+      propertyPath: simulationSpeed
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6115539449509838113, guid: 41494896fc96c9748b81d3356632794e, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6115539449509838113, guid: 41494896fc96c9748b81d3356632794e, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.b
+      value: 0.43437055
+      objectReference: {fileID: 0}
+    - target: {fileID: 6115539449509838113, guid: 41494896fc96c9748b81d3356632794e, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.g
+      value: 0.20265219
+      objectReference: {fileID: 0}
+    - target: {fileID: 6115539449509838113, guid: 41494896fc96c9748b81d3356632794e, type: 3}
+      propertyPath: InitialModule.startColor.maxColor.r
+      value: 0.6226415
+      objectReference: {fileID: 0}
     - target: {fileID: 8230022441722461589, guid: 41494896fc96c9748b81d3356632794e, type: 3}
       propertyPath: m_Name
-      value: Dust ground
+      value: Dust ground Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

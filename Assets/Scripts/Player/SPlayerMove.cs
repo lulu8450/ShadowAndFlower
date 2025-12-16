@@ -1,3 +1,4 @@
+using System.Collections.Specialized;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -25,6 +26,17 @@ public class SPlayerMove : MonoBehaviour
 
     Vector2 moveInput;
 
+    [Header("Flower Trail Settings")]
+    [SerializeField] GameObject[] flowerPrefabs; // Liste des Prefabs de fleurs
+    [SerializeField] float spawnRate = 0.2f; // Taux d'apparition
+    [SerializeField] float spawnDistanceOffset = 0.5f; // Distance derrière le player
+    float spawnTimer;
+
+    [Header("ground Placement")]
+    [SerializeField] float raycastDistance = 2f;
+    [SerializeField] LayerMask groundLayer;
+    [SerializeField] float heightOffset = 0.05f;
+
     private void OnEnable() => inputActions.Enable();
 
     private void Awake()
@@ -40,6 +52,9 @@ public class SPlayerMove : MonoBehaviour
 
         inputActions.Player.Sprint.performed += OnSprint;
         inputActions.Player.Sprint.canceled += OnSprint;
+
+        // Initiliser le timer
+        spawnTimer = spawnRate;
     }
 
     private void Update()
@@ -57,6 +72,12 @@ public class SPlayerMove : MonoBehaviour
                 sprite.rotation = rotateEnd;
             }
         }
+
+        // Mettre à jour le timer dans Update pour l'indépendance de la physique
+        if (spawnTimer > 0)
+        {
+            spawnTimer -= Time.deltaTime;
+        }
     }
 
     private void FixedUpdate()
@@ -72,11 +93,18 @@ public class SPlayerMove : MonoBehaviour
 
             UpdateFacing(direction);
 
+            //Création de Fleurs
+        if (ps.isMoving)
+            {
+                TrySpawnFlower(direction);
+            }
+
         }
         else
         {
             rb.linearVelocity = new Vector3(0f, rb.linearVelocity.y, 0f);
         }
+
     }
 
     void OnMove(InputAction.CallbackContext context)
@@ -128,4 +156,58 @@ public class SPlayerMove : MonoBehaviour
 
     public float GetSpeed() => speed;
     public float GetSprintMultiplicator() => sprintMultiplier;
+
+    // Ajout de la méthode pour les fleurs
+    void TrySpawnFlower(Vector3 moveDirection)
+    {
+        if (flowerPrefabs.Length == 0) return;
+
+        // Si timer est écoulé
+        if (spawnTimer <= 0)
+        {
+            // 1. Calculer la position d'apparition théorique (derrière le joueur)
+            Vector3 spawnOffset = -moveDirection.normalized * spawnDistanceOffset;
+            // On monte la position initiale pour que le Raycast puisse trouver le sol en dessous
+            Vector3 raycastStart = transform.position + spawnOffset + Vector3.up * raycastDistance;
+            Vector3 spawnPosition = Vector3.zero;
+
+            RaycastHit hit;
+
+            // 2. Lancer un Raycast vers le bas
+            // La position de départ est légèrement au-dessus de la position du joueur + l'offset,
+            // et on tire vers le bas (-Vector3.up)
+            if (Physics.Raycast(raycastStart, Vector3.down, out hit, raycastDistance * 2, groundLayer))
+            {
+                // Le Raycast a touché le sol !
+                // La position de la fleur est le point de contact + un petit offset en Y.
+                spawnPosition = hit.point + Vector3.up * heightOffset;
+            }
+            else
+            {
+                // Le Raycast n'a rien trouvé (joueur dans le vide ?), on annule le spawn.
+                Debug.LogWarning("Impossible de trouver le sol pour placer la fleur. Vérifiez la Layer Mask.");
+                return;
+            }
+
+
+            // 3. Choix d'une fleur au hasard
+            GameObject randomFlowerPrefab = flowerPrefabs[Random.Range(0, flowerPrefabs.Length)];
+
+            // 4. Instancier la fleur à la position du sol trouvée
+            // On utilise la rotation de l'impact du Raycast pour aligner la fleur au sol (si sol incliné)
+            Quaternion spawnRotation = Quaternion.FromToRotation(Vector3.up, hit.normal);
+            GameObject flower = Instantiate(randomFlowerPrefab, spawnPosition, spawnRotation);
+
+            // 5. (Votre logique existante pour le script FlowersTrail)
+            FlowersTrail flowerTrail = flower.GetComponent<FlowersTrail>();
+
+            if (flowerTrail == null)
+            {
+                flowerTrail = flower.AddComponent<FlowersTrail>();
+            }
+
+            // 6. Réinitialiser le timer
+            spawnTimer = spawnRate;
+        }
+    }
 }
