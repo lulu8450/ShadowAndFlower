@@ -3,6 +3,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using TMPro;
+using System.Collections;
+
 
 public class MenuManager : MonoBehaviour
 {
@@ -87,6 +89,7 @@ public class MenuManager : MonoBehaviour
 
     private int baseFontSizeStartup = 36;
     private int baseFontSizeMenuP = 36;
+
 
     void Start()
     {
@@ -182,17 +185,23 @@ public class MenuManager : MonoBehaviour
         if (panelToOpen != null) panelToOpen.SetActive(true);
     }
 
-    public void CloseAllPanels()
+   public void CloseAllPanels()
+{
+    if (startupPanels != null)
     {
-        if (startupPanels != null)
-            foreach (var p in startupPanels) if (p != null) p.SetActive(false);
-
-        if (panelMainMenu != null) panelMainMenu.SetActive(false);
-        if (panelSettingsRoot != null) panelSettingsRoot.SetActive(false);
-        if (panelSettingEcranMenuP != null) panelSettingEcranMenuP.SetActive(false);
-        if (panelSettingVolumeMenuP != null) panelSettingVolumeMenuP.SetActive(false);
-        if (panelSettingSoustitreMenuP != null) panelSettingSoustitreMenuP.SetActive(false);
+        foreach (var p in startupPanels)
+        {
+            if (p != null) p.SetActive(false);
+        }
     }
+
+    if (panelMainMenu != null) panelMainMenu.SetActive(false);
+    if (panelSettingsRoot != null) panelSettingsRoot.SetActive(false);
+    if (panelSettingEcranMenuP != null) panelSettingEcranMenuP.SetActive(false);
+    if (panelSettingVolumeMenuP != null) panelSettingVolumeMenuP.SetActive(false);
+    if (panelSettingSoustitreMenuP != null) panelSettingSoustitreMenuP.SetActive(false);
+}
+
 
     // ---------- RESOLUTIONS ----------
     void InitResolutions()
@@ -320,49 +329,65 @@ public class MenuManager : MonoBehaviour
         UpdateExampleTextMenuP();
     }
 
-    void UpdateExampleTextStartup()
-    {
-        if (exampleTextStartup == null) return;
-        int lang = PlayerPrefs.GetInt(KEY_LANG, 1);
-        int sizeIdx = PlayerPrefs.GetInt(KEY_TEXTSIZE, 2);
-        float speed = PlayerPrefs.GetFloat(KEY_TEXTSPEED, 1f);
+   void UpdateExampleTextStartup()
+{
+    if (exampleTextStartup == null) return;
 
-        string example = "Exemple de sous-titre (FR)";
-        if (lang == 0) example = "Example subtitle (EN)";
-        else if (lang == 2) example = "Egzanp soustit (KRÉOL)";
+    int lang = PlayerPrefs.GetInt(KEY_LANG, 1);
+    int sizeIdx = PlayerPrefs.GetInt(KEY_TEXTSIZE, 2);
+    float speed = PlayerPrefs.GetFloat(KEY_TEXTSPEED, 1f);
 
-        exampleTextStartup.text = example + "\n\n[Vitesse: " + speed.ToString("0.00") + "]";
+    string example = "Exemple de sous-titre (FR)";
+    if (lang == 0) example = "Example subtitle (EN)";
+    else if (lang == 2) example = "Examp sous titre (KRÉOL)";
 
-        float scale = MapSizeIndexToScale(sizeIdx);
-        exampleTextStartup.fontSize = Mathf.RoundToInt(baseFontSizeStartup * scale);
-    }
+    string finalText = example + "\n\n[Vitesse: " + speed.ToString("0.00") + "]";
+
+    float scale = MapSizeIndexToScale(sizeIdx);
+    exampleTextStartup.fontSize = Mathf.RoundToInt(baseFontSizeStartup * scale);
+
+    TypingTextManager.Instance.Play(
+    exampleTextStartup,
+    finalText,
+    speed
+);
+}
+
 
     void UpdateExampleTextMenuP()
-    {
-        if (exampleTextMenuP == null) return;
-        int lang = PlayerPrefs.GetInt(KEY_LANG, 1);
-        int sizeIdx = PlayerPrefs.GetInt(KEY_TEXTSIZE, 2);
-        float speed = PlayerPrefs.GetFloat(KEY_TEXTSPEED, 1f);
+{
+    if (exampleTextMenuP == null) return;
 
-        string example = "Exemple de sous-titre (FR)";
-        if (lang == 0) example = "Example subtitle (EN)";
-        else if (lang == 2) example = "Egzanp soustit (KRÉOL)";
+    int lang = PlayerPrefs.GetInt(KEY_LANG, 1);
+    int sizeIdx = PlayerPrefs.GetInt(KEY_TEXTSIZE, 2);
+    float speed = PlayerPrefs.GetFloat(KEY_TEXTSPEED, 1f);
 
-        exampleTextMenuP.text = example + "\n\n[Vitesse: " + speed.ToString("0.00") + "]";
+    string example = "Exemple de sous-titre (FR)";
+    if (lang == 0) example = "Example subtitle (EN)";
+    else if (lang == 2) example = "Egzanp soustit (KRÉOL)";
 
-        float scale = MapSizeIndexToScale(sizeIdx);
-        exampleTextMenuP.fontSize = Mathf.RoundToInt(baseFontSizeMenuP * scale);
-    }
+    string finalText = example + "\n\n[Vitesse: " + speed.ToString("0.00") + "]";
+
+    float scale = MapSizeIndexToScale(sizeIdx);
+    exampleTextMenuP.fontSize = Mathf.RoundToInt(baseFontSizeMenuP * scale);
+
+    TypingTextManager.Instance.Play(
+    exampleTextMenuP,
+    finalText,
+    speed
+);
+}
+
 
     float MapSizeIndexToScale(int idx)
     {
         switch (idx)
         {
-            case 0: return 0.5f;
-            case 1: return 0.75f;
-            case 2: return 1.0f;
-            case 3: return 1.25f;
-            default: return 1.0f;
+           case 0: return 0.5f;   // 50 %
+        case 1: return 0.75f;  // 75 %
+        case 2: return 1.0f;   // 100 %
+        case 3: return 1.5f;   // 150 %
+        default: return 1.0f;
         }
     }
 
@@ -439,4 +464,6 @@ public class MenuManager : MonoBehaviour
     public void OnOpenSoustitreFromSettings() => OnOpenSoustitreFromSettings_Button();
 
     public void OnCloseSettingsToMain() { OpenPanel(panelMainMenu); }
+
+
 }
