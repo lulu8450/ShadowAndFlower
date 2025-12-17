@@ -12,6 +12,8 @@ public class SPlayerMove : MonoBehaviour
 
     [Header("Move Settings")]
     [SerializeField] float speed;
+    [SerializeField] float amplitudeX;
+    [SerializeField] float amplitudeY;
 
     [Header("Sprint Settings")]
     [SerializeField] float sprintMultiplier;
@@ -61,27 +63,15 @@ public class SPlayerMove : MonoBehaviour
 
     private void FixedUpdate()
     {
-        //TODO : mettre des triggers
         if (ps.canMove)
         {
-            Camera camera = Camera.main;
-            var forward = camera.transform.forward;
-            var right = camera.transform.right;
-
-            forward.y = 0f;
-            right.y = 0f;
-
-            forward.Normalize();
-            right.Normalize();
-
             float currentSpeed = ps.isSprinting ? speed * sprintMultiplier : speed;
-            Vector3 direction = new Vector3((forward * moveInput.x).x, 0f, -moveInput.y).normalized;
-            Vector3 velocity = direction * currentSpeed;
+            Vector3 worldDirection = transform.forward * moveInput.y + transform.right * moveInput.x;
+            Vector3 velocity = worldDirection * currentSpeed;
 
             rb.linearVelocity = new Vector3(velocity.x, rb.linearVelocity.y, velocity.z);
 
-            UpdateFacing(direction);
-
+            UpdateFacing(worldDirection);
         }
         else
         {
