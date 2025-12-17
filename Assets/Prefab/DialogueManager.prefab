@@ -25,7 +25,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7532200277630582473}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -957.44745, y: -540.1036, z: 0}
   m_LocalScale: {x: 2.1548822, y: 2.1548822, z: 2.1548822}
   m_ConstrainProportionsScale: 0
@@ -46,13 +46,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogueCanvas: {fileID: 0}
   dialoguePanel: {fileID: 0}
+  imageSpeaker: {fileID: 0}
   canPassText: {fileID: 0}
   nameText: {fileID: 0}
   dialogueText: {fileID: 0}
   choicesParent: {fileID: 0}
-  choiceButtonPrefab: {fileID: 0}
+  choiceButtonPrefab: {fileID: 7524398172910027610, guid: 43a593dcdedad55488c44f0825852774, type: 3}
   currentIndex: 0
   isTyping: 0
   typingSpeed: 0.05
   currentDialogue: {fileID: 0}
   linkManager: {fileID: 0}
+  playerStates: {fileID: 0}
+  next: 0
+  interactAction: {fileID: -7909819145190856854, guid: 052faaac586de48259a63d0c4782560b, type: 3}

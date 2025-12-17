@@ -1,36 +1,39 @@
+using System.Collections;
 using UnityEngine;
 
 public class BrigdeTriggerInteraction : MonoBehaviour, ITriggerInteractable
-{
-    [SerializeField] Transform bridge;
-    [SerializeField] GameObject bridgeColliderCenter;
+{  
+    [SerializeField] GrowVines bridgeVines;
+    [SerializeField] GameObject bridgeCollider;
+    private PlayerStates playerStates;
 
     public void OnInteractStart(SPlayerInteraction player)
     {
-        // A changer
-        Debug.Log("Trigger Interaction in interactable");
-        // ------------------------
+        StartCoroutine(powerAnimation());
+        
+    }
 
-        bridgeColliderCenter.SetActive(false);
-
-        player.GetComponent<PlayerStates>().LockTriggerInteraction();
-        gameObject.SetActive(false);
+    public IEnumerator powerAnimation()
+    {
+        bridgeVines.isGrowingOrRetracting = true;
+        bridgeVines.isFullyGrown = !bridgeVines.isFullyGrown;
+        StartCoroutine(bridgeVines.GrowVineRoutine(bridgeVines.isFullyGrown));
+        yield return new WaitUntil(() => bridgeVines.isGrowingOrRetracting == false);
+        bridgeVines.playerIsClose = false;
+        playerStates.DeLockMovement();
+        playerStates.LockTriggerInteraction();
+        bridgeCollider.SetActive(false);
     }
 
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.CompareTag("Player"))
         {
+            playerStates = collision.GetComponent<PlayerStates>();
             // Debug.Log("Trigger Interaction in trigger");
-            collision.GetComponent<PlayerStates>().DeLockTriggerInteraction();
-        }
-    }
-
-    private void OnTriggerExit(Collider collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            collision.GetComponent<PlayerStates>().LockTriggerInteraction();
+            bridgeVines.playerIsClose = true;
+            playerStates.LockMovement();
+            playerStates.DeLockTriggerInteraction();
         }
     }
 }
