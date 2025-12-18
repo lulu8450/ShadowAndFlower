@@ -26,16 +26,16 @@
 //    public VisualEffect vinesVFX;
 
 //    [Header("Interaction Info (Debug)")]
-//    [SerializeField] private bool playerIsClose = false; // Visible dans l'inspecteur pour vérifier
+//    [SerializeField] private bool playerIsClose = false; // Visible dans l'inspecteur pour vï¿½rifier
 //    [SerializeField] private Material gameObjectMaterial;
 //    [SerializeField] private Material globalMaterial;
 
-//    // État interne
+//    // ï¿½tat interne
 //    private bool isGrowingOrRetracting = false;
 //    private bool isFullyGrown = false;
 //    private float currentGrowValue;
 
-//    // Optimisation : PropertyBlock pour ne pas modifier le material partagé
+//    // Optimisation : PropertyBlock pour ne pas modifier le material partagï¿½
 //    private MaterialPropertyBlock _propBlock;
 
 //    void Start()
@@ -48,7 +48,7 @@
 //        }
 //        else {currentGrowValue = minGrow;}
 
-//        // On applique les valeurs initiales (minGrow) à tous les meshes
+//        // On applique les valeurs initiales (minGrow) ï¿½ tous les meshes
 //        UpdateMaterials(minGrow, maxEmissiveStrenght);
 
 //        if (vinesVFX != null)
@@ -59,7 +59,7 @@
 
 //    void Update()
 //    {
-//        // CONDITION AJOUTÉE : On vérifie si le joueur est proche (playerIsClose)
+//        // CONDITION AJOUTï¿½E : On vï¿½rifie si le joueur est proche (playerIsClose)
 //        if (playerIsClose && Input.GetKeyDown(KeyCode.Space) && !isGrowingOrRetracting)
 //        {
 //            Debug.Log($"SpaceKey On: Starting {(isFullyGrown ? "Retraction" : "Growth")}");
@@ -70,7 +70,7 @@
 //        }
 //    }
 
-//    // --- GESTION DE LA DÉTECTION DU JOUEUR ---
+//    // --- GESTION DE LA Dï¿½TECTION DU JOUEUR ---
 
 //    private void OnTriggerEnter(Collider other)
 //    {
@@ -90,7 +90,7 @@
 
 //    // -----------------------------------------
 
-//    // Fonction unique pour mettre à jour tous les meshes listés sans toucher au fichier Material
+//    // Fonction unique pour mettre ï¿½ jour tous les meshes listï¿½s sans toucher au fichier Material
 //    private void UpdateMaterials(float growVal, float emissiveVal)
 //    {
 //        List<Material> mat = new List<Material>();
@@ -104,7 +104,7 @@
 //            if (mesh == null) continue;
 
 
-//            // 1. On récupère les propriétés actuelles de l'objet
+//            // 1. On rï¿½cupï¿½re les propriï¿½tï¿½s actuelles de l'objet
 //            //mesh.GetPropertyBlock(_propBlock);
 //            mesh.GetComponent<MeshRenderer>().SetMaterials(mat);
 //            Debug.Log("je fait le premier pas");
@@ -114,7 +114,7 @@
 //            _propBlock.SetFloat("EmissiveStrength_", emissiveVal);
 //            Debug.Log("Elle veut pas de moi");
 
-//            // 3. On réapplique le bloc modifié au MeshRenderer
+//            // 3. On rï¿½applique le bloc modifiï¿½ au MeshRenderer
 //            mesh.SetPropertyBlock(_propBlock);
 //            Debug.Log("je l'aime quand meme et je la veux");
 //        }
@@ -125,7 +125,7 @@
 //        float targetGrow = growing ? maxGrow : minGrow;
 //        int targetEmissive = growing ? minEmissiveStrenght : maxEmissiveStrenght;
 
-//        // Démarrage VFX
+//        // Dï¿½marrage VFX
 //        if (growing && vinesVFX != null) vinesVFX.Play();
 
 //        // Boucle d'animation
@@ -134,24 +134,24 @@
 //            float direction = growing ? 1f : -1f;
 //            currentGrowValue += direction * (1f / (timeToGrow / refreshRate)) * refreshRate;
 
-//            // Clamp pour ne jamais dépasser les bornes
+//            // Clamp pour ne jamais dï¿½passer les bornes
 //            currentGrowValue = Mathf.Clamp(currentGrowValue, minGrow, maxGrow);
 
-//            // Calcul de l'émission
+//            // Calcul de l'ï¿½mission
 //            float t = (currentGrowValue - minGrow) / (maxGrow - minGrow);
 //            if (!growing) t = 1 - t;
 //            emissiveStrenght = Mathf.Lerp(maxEmissiveStrenght, minEmissiveStrenght, t);
 
-//            // Mise à jour visuelle via PropertyBlock
+//            // Mise ï¿½ jour visuelle via PropertyBlock
 //            UpdateMaterials(currentGrowValue, emissiveStrenght);
 
 //            yield return new WaitForSeconds(refreshRate);
 //        }
 
-//        // Arrêt VFX
+//        // Arrï¿½t VFX
 //        if (growing && vinesVFX != null) vinesVFX.Stop();
 
-//        // Valeurs finales exactes pour éviter les petits décalages
+//        // Valeurs finales exactes pour ï¿½viter les petits dï¿½calages
 //        UpdateMaterials(targetGrow, targetEmissive);
 
 //        isGrowingOrRetracting = false;
@@ -185,39 +185,39 @@ public class GrowVines : MonoBehaviour
     public VisualEffect vinesVFX;
 
     [Header("Interaction Info (Debug)")]
-    [SerializeField] private bool playerIsClose = false; // Vrai si le joueur est dans le Trigger
+    public bool playerIsClose = false; // Vrai si le joueur est dans le Trigger
 
-    // Instance du Material unique à cet objet (modifiée à l'exécution)
+    // Instance du Material unique ï¿½ cet objet (modifiï¿½e ï¿½ l'exï¿½cution)
     [SerializeField] private Material gameObjectMaterial;
 
-    // Le Material de base (l'asset) à copier. Doit être assigné dans l'Inspecteur !
+    // Le Material de base (l'asset) ï¿½ copier. Doit ï¿½tre assignï¿½ dans l'Inspecteur !
     [SerializeField] private Material globalMaterial;
 
-    // État interne
-    private bool isGrowingOrRetracting = false;
-    [SerializeField] private bool isFullyGrown = false;
+    // ï¿½tat interne
+    public bool isGrowingOrRetracting = false;
+    public bool isFullyGrown = false;
     private float currentGrowValue;
 
     void Start()
     {
-        // VÉRIFICATION CRITIQUE : Créer une instance unique du material.
+        // Vï¿½RIFICATION CRITIQUE : Crï¿½er une instance unique du material.
         if (globalMaterial != null)
         {
             gameObjectMaterial = new Material(globalMaterial);
         }
         else
         {
-            Debug.LogError("Le Global Material n'est pas assigné ! Veuillez glisser l'asset Material dans le champ 'Global Material' dans l'Inspecteur.");
-            enabled = false; // Désactiver le script s'il ne peut pas fonctionner
+            Debug.LogError("Le Global Material n'est pas assignï¿½ ! Veuillez glisser l'asset Material dans le champ 'Global Material' dans l'Inspecteur.");
+            enabled = false; // Dï¿½sactiver le script s'il ne peut pas fonctionner
             return;
         }
 
-        // Assigner l'instance de material unique à tous les MeshRenderers
+        // Assigner l'instance de material unique ï¿½ tous les MeshRenderers
         foreach (var mesh in growVinesMeshes)
         {
             if (mesh != null)
             {
-                // On remplace le material partagé par notre instance unique
+                // On remplace le material partagï¿½ par notre instance unique
                 mesh.sharedMaterial = gameObjectMaterial;
             }
         }
@@ -239,7 +239,7 @@ public class GrowVines : MonoBehaviour
 
     void Update()
     {
-        // Le script se déclenche UNIQUEMENT si le joueur est dans la zone (Trigger)
+        // Le script se dï¿½clenche UNIQUEMENT si le joueur est dans la zone (Trigger)
         if (playerIsClose && Input.GetKeyDown(KeyCode.Space) && !isGrowingOrRetracting)
         {
             Debug.Log($"SpaceKey On: Starting {(isFullyGrown ? "Retraction" : "Growth")} for {gameObject.name}");
@@ -250,7 +250,7 @@ public class GrowVines : MonoBehaviour
         }
     }
 
-    // --- GESTION DE LA DÉTECTION DU JOUEUR ---
+    // --- GESTION DE LA Dï¿½TECTION DU JOUEUR ---
 
     private void OnTriggerEnter(Collider other)
     {
@@ -270,48 +270,48 @@ public class GrowVines : MonoBehaviour
 
     // -----------------------------------------
 
-    // Fonction unique pour mettre à jour les propriétés sur l'instance de Material unique
+    // Fonction unique pour mettre ï¿½ jour les propriï¿½tï¿½s sur l'instance de Material unique
     private void UpdateMaterials(float growVal, float emissiveVal)
     {
         var mesh = growVinesMeshes[0];
         // *******************************************************************
-        // ATTENTION : Les noms des propriétés doivent correspondre EXACTEMENT 
+        // ATTENTION : Les noms des propriï¿½tï¿½s doivent correspondre EXACTEMENT 
         // au "Reference Name" de ton Shader Graph. (Ex: "Grow" ou "_Grow")
         // *******************************************************************
 
         if (gameObjectMaterial == null) return;
 
         // Modification de la valeur Grow
-        // J'utilise "Grow" car c'est le label principal, si ça ne marche pas, essaie "_Grow"
+        // J'utilise "Grow" car c'est le label principal, si ï¿½a ne marche pas, essaie "_Grow"
         if (gameObjectMaterial.HasProperty("Grow_"))
         {
-            Debug.Log("j'ai la propriété grow_");
+            Debug.Log("j'ai la propriï¿½tï¿½ grow_");
             gameObjectMaterial.SetFloat("Grow_", growVal);
         }
         if (gameObjectMaterial.HasProperty("Grow"))
         {
-            Debug.Log("j'ai la propriété grow");
+            Debug.Log("j'ai la propriï¿½tï¿½ grow");
             gameObjectMaterial.SetFloat("Grow", growVal);
         }
 
-        // Modification de la force émissive
+        // Modification de la force ï¿½missive
         // J'utilise "EmissiveStrength" comme dans ton image
         if (gameObjectMaterial.HasProperty("EmissiveStrength_"))
         {
-            Debug.Log("j'ai la propriété EmissiveStrength_");
+            Debug.Log("j'ai la propriï¿½tï¿½ EmissiveStrength_");
             gameObjectMaterial.SetFloat("EmissiveStrength_", emissiveVal);
         }
 
-        // C'est tout. Le Material est modifié, et Unity met à jour le MeshRenderer qui l'utilise.
+        // C'est tout. Le Material est modifiï¿½, et Unity met ï¿½ jour le MeshRenderer qui l'utilise.
     }
 
-    IEnumerator GrowVineRoutine(bool growing)
+    public IEnumerator GrowVineRoutine(bool growing)
     {
         float targetGrow = growing ? maxGrow : minGrow;
         int targetEmissive = growing ? minEmissiveStrenght : maxEmissiveStrenght;
         Debug.Log($"growing is {growing}");
 
-        // Démarrage VFX
+        // Dï¿½marrage VFX
         if (growing && vinesVFX != null) vinesVFX.Play();
 
         // Boucle d'animation
@@ -320,24 +320,24 @@ public class GrowVines : MonoBehaviour
             float direction = growing ? 1f : -1f;
             currentGrowValue += direction * (1f / (timeToGrow / refreshRate)) * refreshRate;
 
-            // Clamp pour ne jamais dépasser les bornes
+            // Clamp pour ne jamais dï¿½passer les bornes
             currentGrowValue = Mathf.Clamp(currentGrowValue, minGrow, maxGrow);
 
-            // Calcul de l'émission (diminue pendant la croissance)
+            // Calcul de l'ï¿½mission (diminue pendant la croissance)
             float t = (currentGrowValue - minGrow) / (maxGrow - minGrow);
             if (!growing) t = 1 - t;
             emissiveStrenght = Mathf.Lerp(maxEmissiveStrenght, minEmissiveStrenght, t);
 
-            // Mise à jour visuelle du Material unique
+            // Mise ï¿½ jour visuelle du Material unique
             UpdateMaterials(currentGrowValue, emissiveStrenght);
 
             yield return new WaitForSeconds(refreshRate);
         }
 
-        // Arrêt VFX
+        // Arrï¿½t VFX
         if (growing && vinesVFX != null) vinesVFX.Stop();
 
-        // Valeurs finales exactes pour éviter les petits décalages
+        // Valeurs finales exactes pour ï¿½viter les petits dï¿½calages
         UpdateMaterials(targetGrow, targetEmissive);
 
         isGrowingOrRetracting = false;
