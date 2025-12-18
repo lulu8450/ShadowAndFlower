@@ -30,11 +30,11 @@ Material:
     m_Ints: []
     m_Floats:
     - _Alpha: 0.66
-    - _AlphaSub: 0
+    - _AlphaSub: 0.151
     - _Intensity: 1
-    - _Pow: 0.52
-    - _Scale: 0.35
+    - _Pow: 0
+    - _Scale: 1.87
     m_Colors:
-    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.9150943, g: 0.6863207, b: 0.699348, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
