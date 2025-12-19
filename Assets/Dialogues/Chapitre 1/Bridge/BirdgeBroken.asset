@@ -1,0 +1,23 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 29b29b4d8cc913549be77a08a98a27be, type: 3}
+  m_Name: BirdgeBroken
+  m_EditorClassIdentifier: 
+  sprite: {fileID: 2145515124, guid: 13cdb7f6162161f47a6c1e9d03d8199f, type: 3}
+  speakerName: "Pers\xE9phone"
+  sentences:
+  - "Le passage est rompu\u2026 Mais la terre est encore vivante. Les racines m\u2019entendent.
+    Elles n\u2019ont jamais cess\xE9 de m\u2019ob\xE9ir. Si le chemin n\u2019existe
+    plus\u2026 alors je le ferai pousser moi-m\xEAme."
+  hasChoices: 0
+  choices: []
+  nextDialogue: {fileID: 0}

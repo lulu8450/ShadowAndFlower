@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 1387532868633544506}
   - component: {fileID: 5080500616875709583}
   - component: {fileID: 3879256281102530798}
-  - component: {fileID: 8526333930390889302}
+  - component: {fileID: 9171430337442060371}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -39,7 +39,6 @@ Transform:
   m_Children:
   - {fileID: 2373850829914953661}
   - {fileID: 2298737399864955679}
-  - {fileID: 398156430421000126}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &1981633038188058579
@@ -153,6 +152,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   sprite: {fileID: 2373850829914953661}
   speed: 6
+  amplitudeX: 0
+  amplitudeY: 0
   sprintMultiplier: 1.7
   rotateDuration: 0.2
 --- !u!114 &5080500616875709583
@@ -189,7 +190,7 @@ MonoBehaviour:
   maxDistance: 6
   speedMultiplicator: 0.9
   offset: 1.5
---- !u!114 &8526333930390889302
+--- !u!114 &9171430337442060371
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -204,28 +205,28 @@ MonoBehaviour:
   cameraZones:
   - cameraTransform: {fileID: 0}
     triggerName: Camera1
-    detectionRadius: 30
+    detectionRadius: 45
   - cameraTransform: {fileID: 0}
     triggerName: Camera2
-    detectionRadius: 30
+    detectionRadius: 45
   - cameraTransform: {fileID: 0}
     triggerName: Camera3
-    detectionRadius: 30
+    detectionRadius: 45
   - cameraTransform: {fileID: 0}
     triggerName: Camera4
-    detectionRadius: 30
+    detectionRadius: 45
   - cameraTransform: {fileID: 0}
     triggerName: Camera5
-    detectionRadius: 30
+    detectionRadius: 45
   - cameraTransform: {fileID: 0}
     triggerName: Camera6
-    detectionRadius: 30
+    detectionRadius: 45
   - cameraTransform: {fileID: 0}
     triggerName: Camera7
-    detectionRadius: 30
+    detectionRadius: 45
   - cameraTransform: {fileID: 0}
     triggerName: Camera8
-    detectionRadius: 30
+    detectionRadius: 45
   animator: {fileID: 0}
   checkInterval: 0.5
 --- !u!1 &3014909624441185091
@@ -304,7 +305,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 2145515124, guid: 13cdb7f6162161f47a6c1e9d03d8199f, type: 3}
+  m_Sprite: {fileID: 1365768452, guid: 13cdb7f6162161f47a6c1e9d03d8199f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -383,73 +384,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   collisionObject: {fileID: 0}
   triggerObject: {fileID: 0}
---- !u!1001 &655548482552766568
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 3208528042917846736}
-    m_Modifications:
-    - target: {fileID: 909288380328402902, guid: 28b8be86bc8d4c14f86769e811f96002, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 909288380328402902, guid: 28b8be86bc8d4c14f86769e811f96002, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.23
-      objectReference: {fileID: 0}
-    - target: {fileID: 909288380328402902, guid: 28b8be86bc8d4c14f86769e811f96002, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 909288380328402902, guid: 28b8be86bc8d4c14f86769e811f96002, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 909288380328402902, guid: 28b8be86bc8d4c14f86769e811f96002, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 909288380328402902, guid: 28b8be86bc8d4c14f86769e811f96002, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 909288380328402902, guid: 28b8be86bc8d4c14f86769e811f96002, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 909288380328402902, guid: 28b8be86bc8d4c14f86769e811f96002, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 909288380328402902, guid: 28b8be86bc8d4c14f86769e811f96002, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 909288380328402902, guid: 28b8be86bc8d4c14f86769e811f96002, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1646575043459919939, guid: 28b8be86bc8d4c14f86769e811f96002, type: 3}
-      propertyPath: m_Name
-      value: VineGrowing
-      objectReference: {fileID: 0}
-    - target: {fileID: 1646575043459919939, guid: 28b8be86bc8d4c14f86769e811f96002, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5772916856156275569, guid: 28b8be86bc8d4c14f86769e811f96002, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 28b8be86bc8d4c14f86769e811f96002, type: 3}
---- !u!4 &398156430421000126 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 909288380328402902, guid: 28b8be86bc8d4c14f86769e811f96002, type: 3}
-  m_PrefabInstance: {fileID: 655548482552766568}
-  m_PrefabAsset: {fileID: 0}

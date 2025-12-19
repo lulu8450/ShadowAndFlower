@@ -25,6 +25,7 @@ public class DialogueManager : MonoBehaviour
     [SerializeField] private PlayerStates playerStates;
     [SerializeField] private bool next = false;
     [SerializeField] private InputActionReference interactAction; 
+    public bool dialogueIsComplete = false;
 
     public void StartDialogue(DialogueData startNode)
     {
@@ -208,6 +209,7 @@ public class DialogueManager : MonoBehaviour
         }
         dialogueCanvas.gameObject.SetActive(false);
         playerStates.DeLockMovement();
+        dialogueIsComplete = true;
         Debug.Log("Fin de la séquence de dialogue.");
     }
 

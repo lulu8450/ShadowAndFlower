@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class NimpheTrigger : MonoBehaviour
+public class DialogueTrigger : MonoBehaviour
 {
     [SerializeField] DialogueManager dialogueManager;
     [SerializeField] DialogueData dialogueData;
@@ -8,9 +8,9 @@ public class NimpheTrigger : MonoBehaviour
     private void Start() {
         dialogueManager = FindFirstObjectByType<DialogueManager>();
     }
-    void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider collision)
     {
-        if (other.CompareTag("Player"))
+        if (collision.CompareTag("Player"))
         {
             Destroy(boxCollider);
             dialogueManager.StartDialogue(dialogueData);
