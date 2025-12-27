@@ -8,6 +8,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/SampleScene.unity
     guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 1
+    path: Assets/Scenes/Temple.unity
+    guid: 3a9e6b3c2dc7dd447b00d4d3e3ae37f4
+  - enabled: 1
+    path: Assets/Scenes/EntreDeuxVoile.unity
+    guid: 3d030846f6abd3745a3f03a1e271e935
+  - enabled: 1
+    path: Assets/Scenes/HadesScenesThrone.unity
+    guid: 7139bfeb997368c49b4c37977c824489
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 3ae87794b3d296d47b5211a298bc1a49, type: 2}
     com.unity.input.settings.actions: {fileID: -944628639613478452, guid: 052faaac586de48259a63d0c4782560b, type: 3}
