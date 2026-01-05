@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: ca5fac702b84e7444ae73c510c187ba6
+guid: 5b6b7972a637e024a80eb7b232aeb6ec
 ScriptedImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -123,9 +123,9 @@ ScriptedImporter:
     tessellationDetail: 0
     uvTransform: {x: 0, y: 0}
   animatedSpriteImportData:
-  - name: Sprite-0001
+  - name: Frame_0
     originalName: 
-    pivot: {x: 0.5, y: 0}
+    pivot: {x: 0.5, y: -0.020408163}
     alignment: 9
     border: {x: 0, y: 0, z: 0, w: 0}
     customData: 
@@ -133,9 +133,9 @@ ScriptedImporter:
       serializedVersion: 2
       x: 4
       y: 4
-      width: 7
-      height: 7
-    spriteID: ba5b1fb53be61f64f807df4f05706969
+      width: 28
+      height: 49
+    spriteID: e03c1b9a3eb268a40abf391a71b1b5a1
     spriteBone: []
     spriteOutline: []
     vertices: []
@@ -144,29 +144,59 @@ ScriptedImporter:
     edges: []
     tessellationDetail: 0
     uvTransform: {x: 4, y: 4}
+  - name: Frame_1
+    originalName: 
+    pivot: {x: 0.5, y: -0.020833334}
+    alignment: 9
+    border: {x: 0, y: 0, z: 0, w: 0}
+    customData: 
+    rect:
+      serializedVersion: 2
+      x: 4
+      y: 61
+      width: 28
+      height: 48
+    spriteID: 244fa758f4d8f744db7dff86df846223
+    spriteBone: []
+    spriteOutline: []
+    vertices: []
+    spritePhysicsOutline: []
+    indices: 
+    edges: []
+    tessellationDetail: 0
+    uvTransform: {x: 4, y: 61}
   spriteSheetImportData: []
   asepriteLayers:
   - layerIndex: 0
     uuid:
-      value0: 4228612825
+      value0: 1562291417
       value1: 0
       value2: 0
       value3: 0
     guid: 0
-    name: Sprite-0001
+    name: Persephone_idll_front
     layerFlags: 0
     layerType: 0
     blendMode: 0
     cells:
-    - name: Sprite-0001
+    - name: Frame_0
       frameIndex: 0
       additiveSortOrder: 0
       cellRect:
-        x: 0
-        y: 0
-        width: 7
-        height: 7
-      spriteId: ba5b1fb53be61f64f807df4f05706969
+        x: 2
+        y: 1
+        width: 28
+        height: 49
+      spriteId: e03c1b9a3eb268a40abf391a71b1b5a1
+    - name: Frame_1
+      frameIndex: 1
+      additiveSortOrder: 0
+      cellRect:
+        x: 2
+        y: 1
+        width: 28
+        height: 48
+      spriteId: 244fa758f4d8f744db7dff86df846223
     linkedCells: []
     parentIndex: -1
   platformSettings:
@@ -185,5 +215,5 @@ ScriptedImporter:
   generatePhysicsShape: 0
   secondarySpriteTextures: []
   spritePackingTag: 
-  canvasSize: {x: 7, y: 7}
-  previousTextureSize: {x: 16, y: 16}
+  canvasSize: {x: 32, y: 64}
+  previousTextureSize: {x: 64, y: 128}
