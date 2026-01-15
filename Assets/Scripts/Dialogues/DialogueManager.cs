@@ -224,10 +224,23 @@ public class DialogueManager : MonoBehaviour
         isTyping = true;
         string sentence = currentDialogue.sentences[currentIndex];
         if (dialogueText != null) dialogueText.text = ""; // Initialiser le texte à vide
-
+        
         foreach (char letter in sentence.ToCharArray())
         {
+            if (Input.GetKey(KeyCode.Space))
+            {
+                typingSpeed = 0f;
+            }
+            else
+            {
+                typingSpeed = 0.05f;
+            }
             if (dialogueText != null) dialogueText.text += letter;
+            if (Input.GetKeyDown(KeyCode.Escape))
+            {
+                EndDialogue();
+                yield break;
+            }
             yield return new WaitForSeconds(typingSpeed);
         }
 

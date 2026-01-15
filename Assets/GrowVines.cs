@@ -161,8 +161,8 @@
 using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEngine.InputSystem;
 using UnityEngine.VFX;
+using TMPro;
 
 public class GrowVines : MonoBehaviour
 {
@@ -183,6 +183,7 @@ public class GrowVines : MonoBehaviour
 
     [Header("VFX Integration")]
     public VisualEffect vinesVFX;
+    public TextMeshProUGUI interactionPromptText;
 
     [Header("Interaction Info (Debug)")]
     public bool playerIsClose = false; // Vrai si le joueur est dans le Trigger
@@ -196,6 +197,7 @@ public class GrowVines : MonoBehaviour
     // �tat interne
     public bool isGrowingOrRetracting = false;
     public bool isFullyGrown = false;
+    public bool caninteract = true;
     private float currentGrowValue;
 
     void Start()
@@ -239,11 +241,13 @@ public class GrowVines : MonoBehaviour
 
     void Update()
     {
-        // Le script se d�clenche UNIQUEMENT si le joueur est dans la zone (Trigger)
-        if (playerIsClose && Input.GetKeyDown(KeyCode.Space) && !isGrowingOrRetracting)
+        // Le script se déclenche UNIQUEMENT si le joueur est dans la zone (Trigger)
+        if (playerIsClose && Input.GetKeyDown(KeyCode.Space) && !isGrowingOrRetracting && caninteract)
         {
             Debug.Log($"SpaceKey On: Starting {(isFullyGrown ? "Retraction" : "Growth")} for {gameObject.name}");
             isGrowingOrRetracting = true;
+            caninteract = false;
+            interactionPromptText.text = "";
             isFullyGrown = !isFullyGrown;
 
             StartCoroutine(GrowVineRoutine(isFullyGrown));
@@ -257,6 +261,12 @@ public class GrowVines : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerIsClose = true;
+            if (interactionPromptText != null && caninteract)
+            {
+                
+                interactionPromptText.text = "Press E";
+            }
+
         }
     }
 
@@ -265,6 +275,10 @@ public class GrowVines : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             playerIsClose = false;
+            if (interactionPromptText != null)
+            {
+                interactionPromptText.text = "";
+            }
         }
     }
 

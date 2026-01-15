@@ -404,8 +404,8 @@ public class MenuManager : MonoBehaviour
         UpdateExampleTextMenuP();
     }
 
-    // ---------- MAIN MENU BUTTONS ----------
-    public void OnPlayButton() { SceneManager.LoadScene("FirstMap"); }
+    // ---------- MAIN MENU BUTTONS ----------SampleScene
+    public void OnPlayButton() { SceneManager.LoadScene("SampleScene"); }
     public void OnOpenSettingsFromMain() { OpenPanel(panelSettingsRoot); }
     public void OnCreditsButton() { SceneManager.LoadScene("Credits"); }
     public void OnQuitButton() { Application.Quit(); }

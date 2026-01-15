@@ -5,6 +5,7 @@ public class BrigdeTriggerInteraction : MonoBehaviour, ITriggerInteractable
 {  
     [SerializeField] GrowVines bridgeVines;
     [SerializeField] GameObject bridgeCollider;
+    [SerializeField] ParticleSystem smokeBridge;
     [SerializeField] Transform visualEffect;
     [SerializeField] DialogueManager dialogueManager;
     [SerializeField] DialogueData brokenBridgeDialogueData;
@@ -22,10 +23,13 @@ public class BrigdeTriggerInteraction : MonoBehaviour, ITriggerInteractable
 
     public IEnumerator powerAnimation()
     {
+        Debug.Log("Repairing bridge");
+        smokeBridge.Play();
         bridgeVines.isGrowingOrRetracting = true;
         bridgeVines.isFullyGrown = !bridgeVines.isFullyGrown;
         StartCoroutine(bridgeVines.GrowVineRoutine(bridgeVines.isFullyGrown));
         yield return new WaitUntil(() => bridgeVines.isGrowingOrRetracting == false);
+        Debug.Log("Starting repair bridge dialogue");
         dialogueManager.StartDialogue(repairBridgeDialogueData);
         bridgeVines.playerIsClose = false;
         playerStates.LockTriggerInteraction();
@@ -36,6 +40,7 @@ public class BrigdeTriggerInteraction : MonoBehaviour, ITriggerInteractable
     {
         dialogueManager.StartDialogue(brokenBridgeDialogueData);
         yield return new WaitUntil(() => dialogueManager.dialogueIsComplete == true);
+        Debug.Log("Dialogue complete, allowing interaction");
         if (dialogueManager.dialogueIsComplete) bridgeVines.playerIsClose = true;
         playerStates.LockMovement();
         playerStates.DeLockTriggerInteraction();
