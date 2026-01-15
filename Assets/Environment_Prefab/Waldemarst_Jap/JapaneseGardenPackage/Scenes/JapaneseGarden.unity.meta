@@ -1,15 +1,7 @@
 fileFormatVersion: 2
-guid: 80a26d31b4c6248999e489e0894e9395
-timeCreated: 1598366419
-licenseType: Store
+guid: 8628304fdc9b5e143adfb030ec8e70ee
 DefaultImporter:
+  externalObjects: {}
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 179492
-  packageName: Japanese Garden Pack
-  packageVersion: 1.1
-  assetPath: Assets/Waldemarst/JapaneseGardenPackage/Scenes/JapaneseGarden.unity
-  uploadId: 526701
